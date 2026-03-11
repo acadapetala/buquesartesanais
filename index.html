@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A cada pétala - Links</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-gold: #D4AF37;
+            --brand-pinkish-brown: #8B5E5E;
+            --brand-cream: #FDFBF7;
+        }
+
+        body {
+            font-family: 'Libre Baskerville', serif;
+            background-color: var(--brand-cream);
+            background-image: 
+                url('https://www.transparenttextures.com/patterns/paper-fibers.png'),
+                radial-gradient(circle at 50% 50%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 100%);
+            background-blend-mode: overlay;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .font-body { font-family: 'Libre Baskerville', serif; }
+        .font-calligraphy { font-family: 'Cormorant Garamond', serif; }
+
+        .crumpled-paper {
+            background-color: #ffffff;
+            background-image: 
+                url("https://www.transparenttextures.com/patterns/asfalt-dark.png"),
+                url("https://www.transparenttextures.com/patterns/white-diamond.png");
+            background-blend-mode: soft-light;
+            position: relative;
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.02);
+            min-height: 100vh;
+        }
+
+        .wreath-bg {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.2;
+        }
+
+        .wreath-bg svg {
+            width: 110vh;
+            height: 110vh;
+            max-width: none;
+            animation: fadeIn 2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 0.2; transform: scale(1); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-slide-up {
+            animation: slideUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .link-card {
+            transition: all 0.3s ease;
+        }
+
+        .link-card:hover {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .link-card:active {
+            transform: scale(0.98);
+        }
+
+        .floral-corner {
+            position: absolute;
+            width: 12rem;
+            height: 12rem;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        .top-left { top: 0; left: 0; }
+        .bottom-right { bottom: 0; right: 0; transform: rotate(180deg); }
+    </style>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="crumpled-paper">
+
+    <!-- Background Wreath -->
+    <div class="wreath-bg">
+        <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M200 40C111.634 40 40 111.634 40 200C40 288.366 111.634 360 200 360C288.366 360 360 288.366 360 200" stroke="#D4AF37" stroke-width="0.75" stroke-linecap="round" />
+            <path d="M200 35C108.873 35 35 108.873 35 200C35 291.127 108.873 365 200 365C291.127 365 365 291.127 365 200" stroke="#D4AF37" stroke-width="0.5" stroke-dasharray="4 4" />
+            <circle cx="45" cy="150" r="2" fill="#5F7D7E" />
+            <circle cx="55" cy="130" r="1.5" fill="#B1909E" />
+            <circle cx="355" cy="250" r="2" fill="#B1909E" />
+            <circle cx="345" cy="270" r="1.5" fill="#5F7D7E" />
+        </svg>
+    </div>
+
+    <!-- Floral Corners -->
+    <div class="floral-corner top-left">
+        <svg viewBox="0 0 100 100" fill="none">
+            <path d="M10 10C30 10 50 30 50 50C50 70 70 90 90 90" stroke="#5F7D7E" stroke-width="0.5" />
+            <circle cx="15" cy="15" r="2" fill="#B1909E" />
+            <circle cx="25" cy="12" r="1.5" fill="#5F7D7E" />
+            <circle cx="12" cy="25" r="1.5" fill="#5F7D7E" />
+            <path d="M10 10C15 25 25 35 40 40" stroke="#D4AF37" stroke-width="0.3" />
+        </svg>
+    </div>
+    <div class="floral-corner bottom-right">
+        <svg viewBox="0 0 100 100" fill="none">
+            <path d="M10 10C30 10 50 30 50 50C50 70 70 90 90 90" stroke="#5F7D7E" stroke-width="0.5" />
+            <circle cx="15" cy="15" r="2" fill="#B1909E" />
+            <circle cx="25" cy="12" r="1.5" fill="#5F7D7E" />
+            <circle cx="12" cy="25" r="1.5" fill="#5F7D7E" />
+            <path d="M10 10C15 25 25 35 40 40" stroke="#D4AF37" stroke-width="0.3" />
+        </svg>
+    </div>
+
+    <div class="relative z-10 min-h-screen flex flex-col items-center py-12 px-6">
+        <main class="w-full max-w-md flex flex-col items-center">
+            
+            <!-- Header Section -->
+            <header class="flex flex-col items-center mb-8 text-center animate-slide-up" style="animation-delay: 0.2s;">
+                <!-- Logo -->
+                <div class="relative flex flex-col items-center mb-6">
+                    <div class="w-40 h-40 rounded-full overflow-hidden border border-[#D4AF37]/20 shadow-sm bg-white p-1">
+                        <img src="https://i.imgur.com/pmfm6R0.jpeg" alt="Logo" class="w-full h-full object-cover rounded-full">
+                    </div>
+                </div>
+
+                <!-- Artisan Profile -->
+                <div class="relative mb-4">
+                    <div class="w-24 h-24 rounded-full overflow-hidden border-2 border-[#D4AF37]/30 shadow-md bg-white">
+                        <img src="https://i.imgur.com/2mZTIib.jpeg" alt="Artesã" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -bottom-1 -right-1 bg-white p-1.5 rounded-full shadow-sm border border-[#D4AF37]/20">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#D4AF37" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                    </div>
+                </div>
+
+                <!-- Profile Info -->
+                <div class="mt-2">
+                    <h2 class="font-serif text-lg text-[#8B5E5E] tracking-[0.15em] mb-2 font-semibold uppercase">@ACADA_PETALA</h2>
+                    <p class="font-body text-sm text-gray-700 max-w-[300px] leading-relaxed italic">
+                        "Arte floral em cetim: durável, sofisticada e feita à mão para você."
+                    </p>
+                </div>
+            </header>
+
+            <!-- Product Sections -->
+            <div class="w-full space-y-12 mb-12">
+                
+                <!-- Section: Buquês Personalizados -->
+                <section class="animate-slide-up" style="animation-delay: 0.4s;">
+                    <div class="relative rounded-[2rem] overflow-hidden shadow-md border border-[#D4AF37]/10 bg-white/40 backdrop-blur-sm p-2 mb-4">
+                        <img src="https://i.imgur.com/f4lkkWk.jpeg" alt="Buquês Artesanais" class="w-full aspect-[4/5] object-cover rounded-[1.5rem]">
+                        <div class="p-4 text-center">
+                            <h3 class="font-serif text-xl text-[#8B5E5E] mb-1">Buquês Personalizados</h3>
+                            <p class="font-body text-[11px] text-gray-600 italic mb-4">Crie o buquê dos seus sonhos em qualquer cor ou estilo.</p>
+                            <a href="https://wa.me/5516993161762?text=Olá!%20Tenho%20interesse%20em%20um%20buquê" target="_blank" class="link-card inline-flex items-center justify-center w-full bg-[#8B5E5E] text-white py-3 px-6 rounded-full shadow-sm hover:bg-[#7a5252] transition-colors">
+                                <span class="font-serif text-[12px] tracking-widest uppercase font-medium">Personalizar meu Buquê</span>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section: Buquê de Girassóis (Novo) -->
+                <section class="animate-slide-up" style="animation-delay: 0.5s;">
+                    <div class="relative rounded-[2rem] overflow-hidden shadow-md border border-[#D4AF37]/10 bg-white/40 backdrop-blur-sm p-2 mb-4">
+                        <img src="https://i.imgur.com/QNuxnxZ.jpeg" alt="Buquê de Girassóis" class="w-full aspect-[4/5] object-cover rounded-[1.5rem]">
+                        <div class="p-4 text-center">
+                            <h3 class="font-serif text-xl text-[#8B5E5E] mb-1">Buquê de Girassóis</h3>
+                            <p class="font-body text-[11px] text-gray-600 italic mb-4">O brilho do sol que nunca murcha. Um presente vibrante e eterno.</p>
+                            <a href="https://wa.me/5516993161762?text=Olá!%20Tenho%20interesse%20em%20um%20buquê" target="_blank" class="link-card inline-flex items-center justify-center w-full bg-[#D4AF37] text-white py-3 px-6 rounded-full shadow-sm hover:bg-[#c49f27] transition-colors">
+                                <span class="font-serif text-[12px] tracking-widest uppercase font-medium">Garantir meu Buquê de Girassóis</span>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section: Flores Unitárias -->
+                <section class="animate-slide-up" style="animation-delay: 0.6s;">
+                    <div class="relative rounded-[2rem] overflow-hidden shadow-md border border-[#D4AF37]/10 bg-white/40 backdrop-blur-sm p-2 mb-4">
+                        <img src="https://i.imgur.com/F7Ef9xB.jpeg" alt="Flores Unitárias" class="w-full aspect-[4/5] object-cover rounded-[1.5rem]">
+                        <div class="p-4 text-center">
+                            <h3 class="font-serif text-xl text-[#8B5E5E] mb-1">Flores Unitárias</h3>
+                            <p class="font-body text-[11px] text-gray-600 italic mb-4">Um detalhe sofisticado para presentear ou decorar.</p>
+                            <a href="https://wa.me/5516993161762?text=Olá!%20Gostaria%20de%20saber%20os%20valores%20e%20opções%20de%20flores%20unitárias." target="_blank" class="link-card inline-flex items-center justify-center w-full border-2 border-[#8B5E5E] text-[#8B5E5E] py-3 px-6 rounded-full hover:bg-[#8B5E5E] hover:text-white transition-all">
+                                <span class="font-serif text-[12px] tracking-widest uppercase font-medium">Quero Flores Unitárias</span>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section: Presente Personalizado -->
+                <section class="animate-slide-up" style="animation-delay: 0.8s;">
+                    <div class="bg-[#FDFBF7] border border-[#D4AF37]/20 rounded-[2rem] p-8 text-center shadow-sm relative overflow-hidden">
+                        <!-- Decorative element -->
+                        <div class="absolute -top-4 -right-4 opacity-10">
+                            <svg width="100" height="100" viewBox="0 0 100 100" fill="none"><path d="M10 10C30 10 50 30 50 50C50 70 70 90 90 90" stroke="#D4AF37" stroke-width="2"/></svg>
+                        </div>
+                        
+                        <h3 class="font-serif text-2xl text-[#8B5E5E] mb-3 italic">Presente Personalizado</h3>
+                        <p class="font-body text-xs text-gray-700 leading-relaxed mb-6">
+                            Tem uma ideia especial? Vamos criar juntos um presente único e memorável.
+                        </p>
+                        <a href="https://wa.me/5516993161762?text=Olá!%20Gostaria%20de%20montar%20um%20presente%20personalizado.%20Pode%20me%20ajudar%20com%20algumas%20ideias?" target="_blank" class="link-card inline-flex items-center justify-center w-full bg-white border border-[#D4AF37]/30 text-[#8B5E5E] py-3 px-6 rounded-full shadow-sm hover:border-[#D4AF37] transition-all">
+                            <span class="font-serif text-[12px] tracking-widest uppercase font-medium">Montar meu Presente</span>
+                        </a>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Footer -->
+            <footer class="flex flex-col items-center text-center space-y-6 animate-slide-up" style="animation-delay: 1.1s;">
+                <p class="font-body text-[11px] text-gray-600 tracking-wide">
+                    Enviamos para todo o Brasil • Feito com amor em cetim.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-[#8B5E5E] hover:text-[#D4AF37] transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </a>
+                    <a href="#" class="text-[#8B5E5E] hover:text-[#D4AF37] transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    </a>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Subtle Studio Lighting Effect -->
+    <div class="fixed inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_50%,transparent_0%,transparent_70%,rgba(0,0,0,0.05)_100%)]"></div>
+
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
