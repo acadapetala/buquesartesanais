@@ -257,7 +257,7 @@
                                         </div>
 
                                         <!-- Adicionais (Collapsible link for minimalism) -->
-                                        <div x-data="{ open: false }" class="space-y-3">
+                                        <div x-show="product.category !== 'Chaveiros'" x-data="{ open: false }" class="space-y-3">
                                             <button @click="open = !open" class="text-[10px] font-bold uppercase tracking-[0.1em] text-brand-gold flex items-center gap-2 hover:opacity-70 transition-opacity">
                                                 <span x-text="open ? '- Ocultar Adicionais' : '+ Adicionar Detalhes Extra'"></span>
                                             </button>
@@ -300,7 +300,7 @@
 
                         <!-- Action -->
                         <div class="pt-4 space-y-4">
-                            <template x-if="product.category !== 'Girassóis' && product.id !== 'custom-buque'">
+                            <template x-if="product.category !== 'Girassóis' && product.category !== 'Chaveiros' && product.id !== 'custom-buque'">
                                 <p class="text-[10px] text-brand-ink/40 font-medium italic flex items-center gap-1.5">
                                     <i data-lucide="palette" class="w-3 h-3"></i>
                                     A cor das flores pode ser personalizada após o pedido.
@@ -516,7 +516,7 @@
             return {
                 activeCategory: 'Rosas',
                 categories: [
-                    "Rosas", "Girassóis", "Borboletas", "Flores Unitárias", "Monte o Seu"
+                    "Rosas", "Girassóis", "Borboletas", "Flores Unitárias", "Chaveiros", "Monte o Seu"
                 ],
                 allAddOns: [
                     { id: 'b_3d', name: 'Borboleta 3D', price: 3.5 },
@@ -606,6 +606,24 @@
                         customAddOns: [
                             { id: 'name_extra', name: 'Adicionar Nome', price: 5.0 }
                         ]
+                    },
+                    {
+                        id: 'chaveiro-mini', category: 'Chaveiros', name: 'Chaveirinho de mini buquê (7cm)',
+                        image: 'https://i.imgur.com/YqWGc1r.jpeg',
+                        options: [{ label: '1 unidade', price: 15 }],
+                        customAddOns: []
+                    },
+                    {
+                        id: 'chaveiro-rosa', category: 'Chaveiros', name: 'Chaveiro de Rosa',
+                        image: 'https://i.imgur.com/NnaRRhw.jpeg',
+                        options: [{ label: '1 unidade', price: 15 }],
+                        customAddOns: []
+                    },
+                    {
+                        id: 'chaveiro-girassol', category: 'Chaveiros', name: 'Chaveiro de Girassol',
+                        image: 'https://i.imgur.com/ztapRmK.jpeg',
+                        options: [{ label: '1 unidade', price: 15 }],
+                        customAddOns: []
                     },
                     {
                         id: 'custom-buque', category: 'Monte o Seu', name: 'Monte o seu Buquê',
