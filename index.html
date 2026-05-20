@@ -341,15 +341,72 @@
                                 </template>
                             </div>
 
-                        <!-- Action -->
-                        <div class="pt-4 space-y-4">
-                            <template x-if="product.category !== 'Girassóis' && product.category !== 'Chaveiros' && product.id !== 'custom-buque'">
-                                <p class="text-[10px] text-brand-ink/40 font-medium italic flex items-center gap-1.5">
-                                    <i data-lucide="palette" class="w-3 h-3"></i>
-                                    A cor das flores pode ser personalizada após o pedido.
-                                </p>
+                            <!-- Bloco de Cálculo de Frete Individual (Conforme solicitado) -->
+                            <template x-if="product.id !== 'custom-buque'">
+                                <div class="border border-brand-ink/5 bg-[#FAF9F5] rounded-2xl p-4 space-y-3 text-left">
+                                    <div class="space-y-1">
+                                        <div class="flex items-center gap-2">
+                                            <i data-lucide="truck" class="w-3.5 h-3.5 text-brand-gold"></i>
+                                            <span class="text-[9.5px] font-black uppercase tracking-widest text-brand-ink">Calcular Entrega</span>
+                                        </div>
+                                        <p class="text-[10px] text-brand-ink/60 font-sans leading-relaxed">
+                                            Se você é de <strong class="text-brand-ink font-semibold">Presidente Epitácio-SP</strong>, combinamos entrega ou retirada local. Para outras cidades, insira seu CEP abaixo:
+                                        </p>
+                                    </div>
+                                    
+                                    <div class="flex gap-2">
+                                        <input 
+                                            type="text" 
+                                            placeholder="Digite seu CEP se não for daqui" 
+                                            maxlength="9"
+                                            x-model="cartCep"
+                                            @keyup.enter="calculateShipping(product)"
+                                            @input="cartCep = cartCep.replace(/\D/g, '').replace(/^(\d{5})(\d)/, '$1-$2')"
+                                            class="w-full bg-white border border-brand-ink/10 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-brand-gold font-medium text-brand-ink"
+                                        >
+                                        <button 
+                                            type="button"
+                                            @click="calculateShipping(product)"
+                                            class="bg-brand-ink text-brand-cream hover:bg-brand-gold px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-wider transition-colors shrink-0 flex items-center justify-center min-w-[70px]"
+                                        >
+                                            <span x-show="!shippingCache[product.id]?.loading">OK</span>
+                                            <span x-show="shippingCache[product.id]?.loading" class="animate-pulse">...</span>
+                                        </button>
+                                    </div>
+
+                                    <p class="text-[9.5px] text-[#C27D38] font-medium leading-normal bg-[#FAF4ED] border border-[#ECD9C5]/50 px-2.5 py-1.5 rounded-lg">
+                                        ⚠️ <strong>Frete pago à parte:</strong> O valor não está incluso no produto e será combinado após o pedido no WhatsApp para garantir a menor tarifa.
+                                    </p>
+                                    
+                                    <!-- Erros ou Resultados de Sucesso -->
+                                    <template x-if="shippingCache[product.id]?.error">
+                                        <p class="text-[10px] text-red-600 font-semibold text-left font-sans" x-text="shippingCache[product.id]?.error"></p>
+                                    </template>
+                                    
+                                    <template x-if="shippingCache[product.id]?.city">
+                                        <div class="space-y-2 text-left pt-1 animate-fade">
+                                            <!-- Se for Presidente Epitácio -->
+                                            <template x-if="shippingCache[product.id]?.city?.toLowerCase().includes('epitácio') || shippingCache[product.id]?.city?.toLowerCase().includes('epitacio')">
+                                                <div class="bg-green-50 border border-green-200/60 p-2.5 rounded-xl">
+                                                    <span class="text-[10px] font-bold text-green-700 block leading-normal">
+                                                        📍 Presidente Epitácio-SP: Combinaremos a entrega local ou retirada diretamente pelo WhatsApp de forma prioritária!
+                                                    </span>
+                                                </div>
+                                            </template>
+                                            
+                                            <!-- Se não for Presidente Epitácio -->
+                                            <template x-if="!(shippingCache[product.id]?.city?.toLowerCase().includes('epitácio') || shippingCache[product.id]?.city?.toLowerCase().includes('epitacio'))">
+                                                <div class="bg-brand-gold/5 border border-brand-gold/15 p-2.5 rounded-xl">
+                                                    <span class="text-[10px] font-bold text-brand-gold block leading-normal">
+                                                        📍 Envio para <strong x-text="`${shippingCache[product.id]?.city || ''}/${shippingCache[product.id]?.uf || ''}`"></strong>: Frete a combinar após o envio do pedido no WhatsApp!
+                                                    </span>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </template>
+                                </div>
                             </template>
-                            
+
                             <div class="flex items-center justify-between gap-4">
                                 <template x-if="product.id !== 'custom-buque'">
                                     <div class="space-y-0.5">
@@ -656,27 +713,80 @@
                     </div>
 
                     <!-- Footer / Checkout -->
-                    <div class="px-8 py-10 bg-white border-t border-brand-ink/5 space-y-6">
-                        <div class="space-y-2">
-                            <div class="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest text-brand-ink/30">
-                                <span>Subtotal</span>
-                                <span x-text="'R$ ' + getCartTotal().toFixed(2).replace('.', ',')"></span>
+                    <div class="px-8 py-6 bg-white border-t border-brand-ink/5 space-y-5" x-show="cart.length > 0">
+                        <div class="space-y-1">
+                            <h3 class="text-xs font-bold uppercase tracking-widest text-[#B5945B]">Resumo da Compra</h3>
+                            <p class="text-[9.5px] text-brand-ink/50 leading-relaxed">Os valores abaixo não incluem o frete. Ele será cotado e combinado pela loja.</p>
+                        </div>
+
+                        <!-- CEP Input element - extremely minimal and elegant -->
+                        <div class="space-y-2 border-b border-brand-ink/5 pb-4">
+                            <label class="text-[9px] font-bold uppercase tracking-wider text-brand-ink/60 block">
+                                CEP de Envio <span class="text-brand-ink/40 font-normal italic">(Se não for de Presidente Epitácio-SP)</span>
+                            </label>
+                            <div class="flex gap-2">
+                                <input 
+                                    type="text" 
+                                    placeholder="Digite seu CEP se outra cidade" 
+                                    maxlength="9"
+                                    x-model="cartCep"
+                                    @keyup.enter="calculateShipping()"
+                                    @input="cartCep = cartCep.replace(/\D/g, '').replace(/^(\d{5})(\d)/, '$1-$2')"
+                                    class="w-full bg-[#FAF9F6] border border-brand-ink/10 rounded-lg px-2.5 py-1.5 text-xs focus:outline-none focus:border-brand-gold font-medium text-brand-ink"
+                                >
+                                <button 
+                                    type="button"
+                                    @click="calculateShipping()"
+                                    class="bg-brand-ink text-brand-cream hover:bg-brand-gold px-3.5 py-1.5 rounded-lg text-[9px] font-extrabold uppercase tracking-wide transition-colors shrink-0"
+                                >
+                                    <span x-show="!loadingCartCep">OK</span>
+                                    <span x-show="loadingCartCep" class="animate-pulse">...</span>
+                                </button>
                             </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-sm font-medium text-brand-ink">Total da Cesta</span>
-                                <span class="text-2xl font-serif text-brand-ink" x-text="'R$ ' + getCartTotal().toFixed(2).replace('.', ',')"></span>
+                            <!-- Error Message -->
+                            <template x-if="cartCepError">
+                                <p class="text-[9px] text-red-500 font-medium" x-text="cartCepError"></p>
+                            </template>
+
+                            <!-- Mini response badge (Elegant & tiny, no clutter) -->
+                            <template x-if="cartCity">
+                                <div class="text-[10px] text-brand-ink/80 pt-1 flex items-center gap-1.5 bg-[#FAF9F5] p-2 rounded-lg border border-brand-gold/10 animate-fade">
+                                    <span>📍</span>
+                                    <span class="font-medium" x-text="cartCity?.toLowerCase()?.includes('epitácio') || cartCity?.toLowerCase()?.includes('epitacio') ? 'Entrega/Retirada em Presidente Epitácio-SP' : 'Envio para ' + (cartCity || '') + '-' + (cartUf || '')"></span>
+                                </div>
+                            </template>
+                        </div>
+
+                        <!-- Mathematical subtotal rows -->
+                        <div class="space-y-2.5 text-xs">
+                            <div class="flex justify-between items-center text-brand-ink/50">
+                                <span>Subtotal de Produtos</span>
+                                <span class="font-bold text-brand-ink" x-text="'R$ ' + getCartTotal().toFixed(2).replace('.', ',')"></span>
+                            </div>
+                            <div class="flex justify-between items-center text-brand-ink/70">
+                                <span>Frete de Envio</span>
+                                <span class="text-[#B5945B] font-bold bg-brand-gold/10 px-2 py-0.5 rounded text-[10px]" x-text="cartCity && (cartCity.toLowerCase().includes('epitácio') || cartCity.toLowerCase().includes('epitacio')) ? 'Entrega/Retirada local' : 'A combinar no WhatsApp'"></span>
+                            </div>
+                            <div class="flex justify-between items-center pt-2.5 border-t border-brand-ink/5">
+                                <span class="font-medium text-brand-ink">Subtotal Geral</span>
+                                <span class="text-xl font-serif text-brand-ink font-bold" x-text="'R$ ' + getCartTotal().toFixed(2).replace('.', ',')"></span>
                             </div>
                         </div>
 
+                        <!-- Important Note (Non-cluttering but super clean) -->
+                        <div class="text-[9.5px] text-[#C27D38] bg-[#FAF4ED] border border-[#ECD9C5]/30 rounded-lg p-2.5 leading-normal">
+                            ⚠️ <strong>Atenção:</strong> O valor do frete não está incluso no subtotal acima. Ele será calculado e acertado de forma personalizada no WhatsApp!
+                        </div>
+
+                        <!-- Giant active checkout button (Locks nothing, highly responsive, doesn't lose the lead!) -->
                         <button 
                             @click="sendCartWhatsApp()"
-                            class="w-full bg-brand-ink text-brand-cream py-5 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-3 hover:bg-brand-gold transition-colors shadow-2xl shadow-brand-ink/20 disabled:opacity-50 disabled:pointer-events-none"
-                            :disabled="cart.length === 0"
+                            class="w-full bg-[#25D366] text-white py-4 rounded-xl text-[10px] font-black uppercase tracking-[0.15em] flex items-center justify-center gap-2 hover:bg-[#128C7E] transition-colors shadow-lg shadow-green-600/10"
                         >
-                            Finalizar no WhatsApp <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.94 3.659 1.437 5.634 1.437h.005c6.558 0 11.897-5.335 11.9-11.894a11.83 11.83 0 00-3.483-8.413Z"/></svg>
+                            <span>Enviar Pedido pelo WhatsApp</span>
                         </button>
-                        
-                        <p class="text-[9px] text-center text-brand-ink/30 font-medium italic">
+                        <p class="text-[9.5px] text-center text-brand-ink/30 font-medium italic">
                             O pagamento e a personalização de cores serão combinados diretamente no WhatsApp.
                         </p>
                     </div>
@@ -699,6 +809,16 @@
                 cartOpen: false,
                 showToast: false,
                 activeCategory: 'Rosas',
+                cartCep: '',
+                cartCepError: '',
+                cartUf: '',
+                cartCity: '',
+                cartStreet: '',
+                cartBairro: '',
+                cartShippingMethod: 'pac',
+                loadingCartCep: false,
+                shippingOptions: [],
+                shippingCache: {},
                 categories: [
                     "Rosas", "Girassóis", "Borboletas", "Flores Unitárias", "Chaveiros", "Monte o Seu"
                 ],
@@ -735,15 +855,22 @@
                     setTimeout(() => this.showToast = false, 4000);
                     setTimeout(() => lucide.createIcons(), 50);
                     
-                    // Subtle reminder that the cart is here if they add more
-                    if (this.cart.length > 3) {
-                        this.cartOpen = true;
+                    // Always open the cart drawer immediately showing purchase summary!
+                    this.cartOpen = true;
+
+                    // Automatically refresh combined cart shipping if CEP is already filled
+                    if (this.cartCep && this.cartCep.replace(/\D/g, '').length === 8) {
+                        this.calculateShipping();
                     }
                     
                     setTimeout(() => lucide.createIcons(), 100);
                 },
                 removeFromCart(index) {
                     this.cart.splice(index, 1);
+                    // Refresh combined shipping on basket change
+                    if (this.cartCep && this.cartCep.replace(/\D/g, '').length === 8) {
+                        this.calculateShipping();
+                    }
                     setTimeout(() => lucide.createIcons(), 10);
                 },
                 updateQuantity(index, delta) {
@@ -752,10 +879,94 @@
                         this.cart[index].quantity = newQty;
                     } else if (newQty === 0) {
                         this.removeFromCart(index);
+                        return;
+                    }
+                    // Refresh combined shipping on basket change
+                    if (this.cartCep && this.cartCep.replace(/\D/g, '').length === 8) {
+                        this.calculateShipping();
                     }
                 },
                 getCartTotal() {
                     return this.cart.reduce((sum, item) => sum + (item.total * item.quantity), 0);
+                },
+                calculateShipping(sourceProduct = null) {
+                    const cepInput = this.cartCep;
+                    if (!cepInput) {
+                        if (sourceProduct) {
+                            this.shippingCache[sourceProduct.id] = { error: 'Digite seu CEP', loading: false, options: [], city: '', uf: '' };
+                        } else {
+                            this.cartCepError = 'Digite seu CEP';
+                        }
+                        return;
+                    }
+                    const cleanCep = cepInput.replace(/\D/g, '');
+                    if (cleanCep.length !== 8) {
+                        if (sourceProduct) {
+                            this.shippingCache[sourceProduct.id] = { error: 'CEP inválido (deve conter 8 dígitos)', loading: false, options: [], city: '', uf: '' };
+                        } else {
+                            this.cartCepError = 'CEP inválido (deve conter 8 dígitos)';
+                        }
+                        return;
+                    }
+                    
+                    if (sourceProduct) {
+                        this.shippingCache[sourceProduct.id] = { loading: true, error: '', options: [], city: '', uf: '' };
+                    } else {
+                        this.loadingCartCep = true;
+                        this.cartCepError = '';
+                    }
+
+                    fetch(`https://viacep.com.br/ws/${cleanCep}/json/`)
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.erro) {
+                                if (sourceProduct) {
+                                    this.shippingCache[sourceProduct.id] = { error: 'CEP não encontrado', loading: false, options: [], city: '', uf: '' };
+                                } else {
+                                    this.loadingCartCep = false;
+                                    this.cartCepError = 'CEP não encontrado';
+                                }
+                            } else {
+                                this.cartUf = data.uf;
+                                this.cartCity = data.localidade;
+                                this.cartStreet = data.logradouro || '';
+                                this.cartBairro = data.bairro || '';
+                                if (!sourceProduct) {
+                                    this.cartCepError = '';
+                                }
+
+                                const combinedOptions = [
+                                    { id: 'a_combinar', name: 'A combinar no WhatsApp', price: 0, days: 'Calculamos o melhor valor para você' }
+                                ];
+
+                                if (sourceProduct) {
+                                    this.shippingCache[sourceProduct.id] = {
+                                        loading: false,
+                                        error: '',
+                                        city: data.localidade,
+                                        uf: data.uf,
+                                        options: combinedOptions,
+                                        selectedId: 'a_combinar'
+                                    };
+                                } else {
+                                    this.loadingCartCep = false;
+                                    this.shippingOptions = combinedOptions;
+                                    this.cartShippingMethod = 'a_combinar';
+                                }
+                            }
+                        })
+                        .catch(() => {
+                            if (sourceProduct) {
+                                this.shippingCache[sourceProduct.id] = { error: 'Erro ao consultar o CEP', loading: false, options: [], city: '', uf: '' };
+                            } else {
+                                this.loadingCartCep = false;
+                                this.cartCepError = 'Erro ao consultar o CEP';
+                            }
+                        });
+                },
+                getSelectedShippingCost() {
+                    const opt = this.shippingOptions.find(o => o.id === this.cartShippingMethod);
+                    return opt ? opt.price : 0;
                 },
                 sendCartWhatsApp() {
                     let message = `Olá! Gostaria de fazer o seguinte pedido:\n\n`;
@@ -770,8 +981,18 @@
                         message += `Subtotal: R$ ${(item.total * item.quantity).toFixed(2).replace('.', ',')}\n\n`;
                     });
                     
-                    message += `*Total do Pedido: R$ ${this.getCartTotal().toFixed(2).replace('.', ',')}*\n\n`;
-                    message += `Aguardo retorno para combinar cores e personalizações!`;
+                    const subtotal = this.getCartTotal();
+                    
+                    message += `*Subtotal do Pedido:* R$ ${subtotal.toFixed(2).replace('.', ',')}\n`;
+                    
+                    if (this.cartCity) {
+                        message += `*CEP de Envio:* ${this.cartCep}\n`;
+                        message += `*Localidade:* ${this.cartStreet ? `${this.cartStreet}, ` : ''}${this.cartBairro ? `${this.cartBairro}, ` : ''}${this.cartCity} - ${this.cartUf}\n`;
+                        message += `*Forma de Envio:* A combinar (calcularemos a melhor opção para você)\n\n`;
+                    }
+                    
+                    message += `*Total Geral do Pedido (sem frete):* R$ ${subtotal.toFixed(2).replace('.', ',')}*\n\n`;
+                    message += `Aguardo retorno com a cotação do frete para podermos combinar o pagamento e as cores!`;
                     
                     const encoded = encodeURIComponent(message);
                     window.open(`https://wa.me/5516993161762?text=${encoded}`, '_blank');
@@ -856,7 +1077,7 @@
                     {
                         id: 'chaveiro-mini', category: 'Chaveiros', name: 'Chaveirinho de mini buquê (7cm)',
                         image: 'https://i.imgur.com/YqWGc1r.jpeg',
-                        options: [{ label: '1 unidade', price: 20 }],
+                        options: [{ label: '1 unidade', price: 15 }],
                         customAddOns: []
                     },
                     {
