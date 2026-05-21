@@ -570,13 +570,25 @@
 
 
     <!-- 15. Floating Bag Button badge -->
-    <div id="floating-cart-btn" class="fixed top-8 right-8 z-[110] animate-bounce-subtle hidden h-14 w-14">
-      <button onclick="openCartDrawer()" class="relative w-14 h-14 bg-brand-ink text-brand-cream rounded-full flex items-center justify-center shadow-2xl hover:scale-105 active:scale-95 transition-all group cursor-pointer border border-[#E9D5D8]/20">
+    <div id="floating-cart-btn" class="fixed top-8 right-8 z-[110] hidden flex flex-col items-end gap-2.5 max-w-[280px]">
+      <button onclick="openCartDrawer()" class="relative w-14 h-14 bg-brand-ink text-brand-cream rounded-full flex items-center justify-center shadow-2xl hover:scale-105 active:scale-95 transition-all group cursor-pointer border border-[#E9D5D8]/20 animate-bounce-subtle">
         <i data-lucide="shopping-bag" class="w-5 h-5 text-brand-cream"></i>
         <span id="floating-cart-badge" class="absolute -top-1 -right-1 w-6 h-6 bg-brand-gold text-white text-[10px] font-black rounded-full flex items-center justify-center border-2 border-brand-cream">
           0
         </span>
       </button>
+
+      <!-- Visual Attention CTA Badge -->
+      <div id="cart-cta-message" class="bg-brand-gold text-white px-3.5 py-2.5 rounded-2xl shadow-xl flex items-center justify-between gap-2.5 border border-white/20 select-none animate-bounce-subtle relative cursor-pointer" onclick="openCartDrawer()">
+        <span class="flex items-center gap-1.5 shrink-0 text-[10px] font-extrabold uppercase tracking-widest leading-none">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
+          </span>
+          SEU MIMO ESTÁ NA CESTA! VER 🛒
+        </span>
+        <div class="absolute -top-1 right-6 w-2.5 h-2.5 bg-brand-gold rotate-45 border-t border-l border-white/10"></div>
+      </div>
     </div>
 
     <!-- 16. Floating WhatsApp widget bottom-right -->
@@ -1223,9 +1235,9 @@
         // Cache cart
         localStorage.setItem("cadaPetalaCart", JSON.stringify(cart));
 
-        // Toast feedback
-        showToastNotification(`Adicionado à Cesta: ${product.name}! ✨`);
-        
+        // Toast feedback notifying about floating basket with high visibility
+        showToastNotification(`Presente reservado na Cesta! 🌸 Toque no ícone no topo direito para concluir.`);
+
         // Quick visual checkmark update
         config.added = true;
         renderCatalog();
@@ -1234,9 +1246,19 @@
           renderCatalog();
         }, 2200);
 
-        // Synchronize and open drawer
+        // Synchronize state
         syncBagIndicatorUI();
-        openCartDrawer();
+
+        // High conversion animation flash & scale attention on the floating basket
+        const floatCart = document.getElementById("floating-cart-btn");
+        if (floatCart) {
+          floatCart.classList.add("scale-110", "rotate-6");
+          // Add extra animation class
+          floatCart.style.transition = "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+          setTimeout(() => {
+            floatCart.classList.remove("scale-110", "rotate-6");
+          }, 800);
+        }
       }
 
       function removeItemFromCart(index) {
@@ -1378,30 +1400,51 @@
       function checkoutToWhatsApp() {
         if (cart.length === 0) return;
 
-        let orderText = `Olá! Realizei uma intenção de pedido pelo site:\n\n`;
+        let orderText = `*✨ INTENÇÃO DE PEDIDO - A CADA PÉTALA ✨*\n`;
+        orderText += `----------------------------------------\n\n`;
+        orderText += `Olá! Encaminho abaixo a lista de mimos artesanais que gostaria de encomendar com o Ateliê:\n\n`;
+        orderText += `*🛍️ CESTA DE PRESENTES:*\n`;
+        orderText += `----------------------------------------\n`;
+
         cart.forEach((item, index) => {
-          orderText += `*${index + 1}. ${item.name}*\n`;
-          orderText += `  • Opção: ${item.optionLabel}\n`;
+          orderText += `*MIMO #${index + 1}: ${item.name}*\n`;
+          orderText += `  • *Opção selecionada:* ${item.optionLabel}\n`;
           if (item.selectedAddOns.length > 0) {
-            orderText += `  • Extras: ${item.selectedAddOns.map(a => a.name).join(", ")}\n`;
+            orderText += `  • *Adicionais / Extras:*\n`;
+            item.selectedAddOns.forEach(addon => {
+              orderText += `    ➕ ${addon.name} (+ R$ ${addon.price.toFixed(2).replace(".", ",")})\n`;
+            });
+          } else {
+            orderText += `  • *Adicionais / Extras:* Nenhum extra\n`;
           }
-          orderText += `  • Qtd: ${item.quantity} unidades\n`;
-          orderText += `  • Subtotal: R$ ${(item.total * item.quantity).toFixed(2).replace(".", ",")}\n\n`;
+          orderText += `  • *Quantidade:* ${item.quantity} ${item.quantity === 1 ? 'unidade' : 'unidades'}\n`;
+          orderText += `  • *Subtotal deste item:* R$ ${(item.total * item.quantity).toFixed(2).replace(".", ",")}\n\n`;
         });
 
         const val = getCartTotal();
-        orderText += `*Total estimado dos Produtos:* R$ ${val.toFixed(2).replace(".", ",")}\n`;
+        orderText += `----------------------------------------\n`;
+        orderText += `*💰 RESUMO FINANCEIRO:*\n`;
+        orderText += `----------------------------------------\n`;
+        orderText += `• *Subtotal Estimado dos Produtos:* R$ ${val.toFixed(2).replace(".", ",")}\n`;
+        orderText += `• *Taxa de Envio:* A combinar no WhatsApp\n\n`;
 
-        if (cartCep) {
-          orderText += `*CEP de Envio:* ${cartCep}\n`;
-        }
-        if (cartCity) {
-          const local = cartCity.toLowerCase().includes("epitácio") || cartCity.toLowerCase().includes("epitacio");
-          orderText += `*Destino:* ${cartStreet ? `${cartStreet}, ` : ""}${cartBairro ? `${cartBairro}, ` : ""}${cartCity}/${cartUf}\n`;
-          orderText += `*Frete:* ${local ? "Retirada/entrega local em Presidente Epitácio-SP (Sem frete)" : "A combinar via Correios"}\n`;
+        if (cartCep || cartCity) {
+          orderText += `----------------------------------------\n`;
+          orderText += `*📍 DETALHES DE ENVIO:*\n`;
+          orderText += `----------------------------------------\n`;
+          if (cartCep) {
+            orderText += `• *CEP de Destino:* ${cartCep}\n`;
+          }
+          if (cartCity) {
+            const local = cartCity.toLowerCase().includes("epitácio") || cartCity.toLowerCase().includes("epitacio");
+            orderText += `• *Cidade/Destino:* ${cartStreet ? `${cartStreet}, ` : ""}${cartBairro ? `${cartBairro}, ` : ""}${cartCity}/${cartUf}\n`;
+            orderText += `• *Frete:* ${local ? "Retirada/entrega local em Presidente Epitácio-SP (Sem frete)" : "A combinar via Correios"}\n`;
+          }
+          orderText += `\n`;
         }
 
-        orderText += `\nGostaria de falar com o Ateliê para definir as cores das flores de cetim e combinar a finalização! Obrigado(a)! 💐`;
+        orderText += `----------------------------------------\n`;
+        orderText += `Gostaria de falar com o Ateliê para combinarmos os detalhes (cores das flores de cetim, laços, embalagem e frase do bilhete)! Muito obrigado(a)! 💐`;
 
         window.open(`https://wa.me/5516993161762?text=${encodeURIComponent(orderText)}`, "_blank");
       }
@@ -1411,7 +1454,9 @@
         if (!product) return;
 
         if (productId === "custom-buque") {
-          const message = `Olá! Vi a opção de "Monte o seu Buquê" no site e gostaria de solicitar um orçamento personalizado para co-criar um modelo exclusivo com o Ateliê. 🎨`;
+          const message = `*🎨 SOLICITAÇÃO DE ORÇAMENTO PERSONALIZADO*\n` +
+                          `----------------------------------------\n\n` +
+                          `Olá! Fiquei muito interessado(a) na opção "Monte o seu Buquê" no site e gostaria de conversar com o Ateliê para criarmos um modelo exclusivo e solicitar um orçamento personalizado! 💐`;
           window.open(`https://wa.me/5516993161762?text=${encodeURIComponent(message)}`, "_blank");
           return;
         }
@@ -1424,25 +1469,49 @@
         const pool = getAddonsPool(product);
         const list = pool.filter(a => config.addOns.includes(a.id));
 
-        let txt = `Olá! Gostaria de reservar este presente de forma direta pelo site:\n\n`;
-        txt += `*Produto:* ${product.name}\n`;
-        txt += `*Opção:* ${option.label} (R$ ${option.price.toFixed(2).replace(".", ",")})\n`;
+        let txt = `*✨ INTENÇÃO DE RESERVA DIRETA - A CADA PÉTALA ✨*\n`;
+        txt += `----------------------------------------\n\n`;
+        txt += `Olá! Gostaria de encomendar este mimo artesanal diretamente pelo site:\n\n`;
+        txt += `*🎁 MIMO SOLICITADO:*\n`;
+        txt += `----------------------------------------\n`;
+        txt += `• *Produto:* ${product.name}\n`;
+        txt += `• *Opção selecionada:* ${option.label} (Base: R$ ${option.price.toFixed(2).replace(".", ",")})\n`;
+        
         if (list.length > 0) {
-          txt += `*Diferenciais:* ${list.map(x => x.name).join(", ")}\n`;
+          txt += `• *Adicionais / Extras:*\n`;
+          list.forEach(addon => {
+            txt += `  ➕ ${addon.name} (+ R$ ${addon.price.toFixed(2).replace(".", ",")})\n`;
+          });
+        } else {
+          txt += `• *Adicionais / Extras:* Nenhum extra\n`;
         }
-        txt += `*Qtd:* ${config.quantity}x\n`;
-        txt += `*Valor Estimado:* R$ ${total.toFixed(2).replace(".", ",")}\n\n`;
+        
+        txt += `• *Quantidade:* ${config.quantity}x\n`;
+        txt += `• *Valor Estimado do Mimo:* R$ ${total.toFixed(2).replace(".", ",")}\n\n`;
 
-        if (cartCep) {
-          txt += `*CEP de Envio:* ${cartCep}\n`;
-        }
-        if (cartCity) {
-          const local = cartCity.toLowerCase().includes("epitácio") || cartCity.toLowerCase().includes("epitacio");
-          txt += `*Destino:* ${cartStreet ? `${cartStreet}, ` : ""}${cartBairro ? `${cartBairro}, ` : ""}${cartCity}/${cartUf}\n`;
-          txt += `*Frete:* ${local ? "Retirada/entrega local em Presidente Epitácio-SP (Sem frete)" : "A combinar via Correios"}\n\n`;
+        txt += `----------------------------------------\n`;
+        txt += `*💰 RESUMO FINANCEIRO:*\n`;
+        txt += `----------------------------------------\n`;
+        txt += `• *Total Estimado dos Produtos:* R$ ${total.toFixed(2).replace(".", ",")}\n`;
+        txt += `• *Taxa de Envio:* A combinar no WhatsApp\n\n`;
+
+        if (cartCep || cartCity) {
+          txt += `----------------------------------------\n`;
+          txt += `*📍 DETALHES DE ENVIO:*\n`;
+          txt += `----------------------------------------\n`;
+          if (cartCep) {
+            txt += `• *CEP de Destino:* ${cartCep}\n`;
+          }
+          if (cartCity) {
+            const local = cartCity.toLowerCase().includes("epitácio") || cartCity.toLowerCase().includes("epitacio");
+            txt += `• *Cidade/Destino:* ${cartStreet ? `${cartStreet}, ` : ""}${cartBairro ? `${cartBairro}, ` : ""}${cartCity}/${cartUf}\n`;
+            txt += `• *Frete:* ${local ? "Retirada/entrega local em Presidente Epitácio-SP (Sem frete)" : "A combinar via Correios"}\n`;
+          }
+          txt += `\n`;
         }
 
-        txt += `Gostaria de falar sobre os tons de cetim para as flores e combinar o frete de envio! ✨`;
+        txt += `----------------------------------------\n`;
+        txt += `Gostaria de ajustar com o Ateliê sobre os tons de cetim para as flores e finalizar a compra! Muito obrigado(a)! ✨`;
 
         window.open(`https://wa.me/5516993161762?text=${encodeURIComponent(txt)}`, "_blank");
       }
@@ -1909,10 +1978,16 @@
         const count = cart.reduce((acc, item) => acc + item.quantity, 0);
 
         if (count > 0) {
-          if (floatCart) floatCart.classList.remove("hidden");
+          if (floatCart) {
+            floatCart.classList.remove("hidden");
+            floatCart.classList.add("flex");
+          }
           if (floatBadge) floatBadge.textContent = count;
         } else {
-          if (floatCart) floatCart.classList.add("hidden");
+          if (floatCart) {
+            floatCart.classList.add("hidden");
+            floatCart.classList.remove("flex");
+          }
         }
       }
 
