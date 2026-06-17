@@ -1,6 +1,0 @@
-{
-  "name": "A Cada Pétala",
-  "description": "Ateliê de Buquês de cetim e presentes feitos à mão com carinho que nunca murcham.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
