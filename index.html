@@ -1,0 +1,2107 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A Cada Pétala - Buquês de Cetim que Nunca Murcham</title>
+    
+    <!-- Tailind CSS Play CDN with brand style extensions -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              serif: ["Playfair Display", "serif"],
+              accent: ["Cormorant Garamond", "serif"],
+            },
+            colors: {
+              brand: {
+                cream: '#FCFAF7',
+                ink: '#2D2926',
+                gold: '#A67C37',
+                rose: '#E9D5D8',
+                soft: '#F2EFED',
+              }
+            },
+            animation: {
+              marquee: 'marquee 35s linear infinite',
+              'fade-in': 'fade-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'bounce-subtle': 'bounce-subtle 1.8s ease-in-out infinite',
+              'pulse-ring': 'pulse-ring 2.2s cubic-bezier(0.25, 0, 0, 1) infinite',
+              'float-subtle': 'float-subtle 3.5s ease-in-out infinite',
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      /* Embed original styling, transitions, and keyframes */
+      @keyframes bounce-subtle {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-3px); }
+      }
+      @keyframes pulse-ring {
+        0% { box-shadow: 0 0 0 0 rgba(166, 124, 55, 0.6); }
+        70% { box-shadow: 0 0 0 15px rgba(166, 124, 55, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(166, 124, 55, 0); }
+      }
+      @keyframes float-subtle {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+      }
+      @keyframes shimmer {
+        0% { transform: translateX(-150%) skewX(-25deg); }
+        100% { transform: translateX(150%) skewX(-25deg); }
+      }
+      @keyframes fade-in {
+        0% { opacity: 0; transform: translateY(8px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-100%); }
+      }
+
+      .animate-marquee { animation: marquee 35s linear infinite; }
+      .animate-bounce-subtle { animation: bounce-subtle 1.8s ease-in-out infinite; }
+      .animate-pulse-ring { animation: pulse-ring 2.2s cubic-bezier(0.25, 0, 0, 1) infinite; }
+      .animate-float-subtle { animation: float-subtle 3.5s ease-in-out infinite; }
+      .animate-fade-in { animation: fade-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+      .product-card img { transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+      .product-card:hover img { transform: scale(1.04); }
+      
+      ::selection {
+        background: #E9D5D8;
+        color: #2D2926;
+      }
+      body {
+        background-color: #FCFAF7;
+        color: #2D2926;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+
+      /* Sliding drawer styling */
+      .cart-drawer-slider {
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+    </style>
+  </head>
+  <body class="bg-brand-cream text-brand-ink font-sans selection:bg-brand-rose selection:text-brand-ink">
+
+    <!-- 1. Announcement Ribbon Bar -->
+    <div class="bg-brand-ink text-[#FFFDFC]/90 py-2.5 overflow-hidden border-b border-white/5 relative flex select-none shrink-0 z-40">
+      <div class="flex flex-row min-w-max">
+        <div class="flex items-center gap-12 animate-marquee text-[10px] md:text-xs font-semibold tracking-[0.16em] uppercase whitespace-nowrap pr-12 shrink-0">
+          <span>🌸 Flores de Cetim Feitas à Mão</span>
+          <span>•</span>
+          <span>O Presente Perfeito que Nunca Murcha</span>
+          <span>•</span>
+          <span>Enviamos para todo o Brasil</span>
+        </div>
+        <div class="flex items-center gap-12 animate-marquee text-[10px] md:text-xs font-semibold tracking-[0.16em] uppercase whitespace-nowrap pr-12 shrink-0" aria-hidden="true">
+          <span>🌸 Flores de Cetim Feitas à Mão</span>
+          <span>•</span>
+          <span>O Presente Perfeito que Nunca Murcha</span>
+          <span>•</span>
+          <span>Enviamos para todo o Brasil</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Toast Addition Feedback Notification -->
+    <div id="toast-container" class="fixed top-8 left-1/2 -track-x-1/2 -translate-x-1/2 z-[300] w-[92%] max-w-sm hidden">
+      <div class="bg-brand-ink text-brand-cream p-4 rounded-2xl shadow-2xl flex items-center justify-between border border-white/10 backdrop-blur-md animate-fade-in">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 bg-brand-gold rounded-full flex items-center justify-center shadow-lg shadow-brand-gold/20 shrink-0">
+            <i data-lucide="shopping-bag" class="w-4 h-4 text-white"></i>
+          </div>
+          <div class="text-left">
+            <p class="text-[10px] font-bold uppercase tracking-widest text-[#B5945B]">Item na Cesta!</p>
+            <p id="toast-message" class="text-[11px] text-brand-cream/80 font-medium leading-tight">Adicionado com sucesso!</p>
+          </div>
+        </div>
+        <button onclick="openCartDrawer()" class="bg-brand-gold text-white px-3.5 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest hover:scale-105 active:scale-95 shadow-lg shadow-brand-gold/20 cursor-pointer shrink-0">
+          Ver Cesta
+        </button>
+      </div>
+    </div>
+
+    <!-- 3. Header Component -->
+    <header class="pt-12 pb-10 px-6 text-center border-b border-brand-ink/5 bg-transparent">
+      <div class="max-w-3xl mx-auto space-y-6">
+        <div class="flex flex-col items-center gap-4">
+          <div class="relative group">
+            <div class="absolute -inset-1.5 rounded-full bg-gradient-to-r from-brand-rose via-brand-gold to-brand-rose opacity-45 blur-xl group-hover:opacity-85 transition duration-1000"></div>
+            <img src="https://i.imgur.com/pmfm6R0.jpeg" alt="Logomarca A Cada Pétala" class="relative w-24 h-24 md:w-28 md:h-28 object-cover rounded-full shadow-2xl border-4 border-white transition-transform duration-700 hover:scale-105" />
+          </div>
+          <h1 class="text-3xl md:text-5xl font-serif tracking-tight text-brand-ink">A Cada Pétala</h1>
+        </div>
+
+        <div class="flex items-center justify-center gap-4">
+          <div class="h-[1px] w-8 bg-brand-gold/30"></div>
+          <p class="font-accent text-base md:text-xl text-brand-ink/80 font-medium tracking-wide">
+            Buquês de cetim e presentes feitos à mão com carinho
+          </p>
+          <div class="h-[1px] w-8 bg-brand-gold/30"></div>
+        </div>
+
+        <div class="flex justify-center items-center gap-6">
+          <a href="https://instagram.com/a_cada_petala" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-[#B5945B] hover:text-brand-ink transition-colors">
+            <i data-lucide="instagram" class="w-3.5 h-3.5"></i>
+            <span>@a_cada_petala</span>
+          </a>
+          <a href="https://wa.me/5516993161762" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-[#B5945B] hover:text-brand-ink transition-colors">
+            <i data-lucide="message-circle" class="w-3.5 h-3.5 text-[#25D366]"></i>
+            <span>WhatsApp</span>
+          </a>
+        </div>
+
+        <div class="pt-4 flex flex-col items-center gap-3">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 bg-brand-rose/60 border border-brand-rose/80 text-brand-ink rounded-full text-[9px] font-bold uppercase tracking-widest">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-gold opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-gold"></span>
+            </span>
+            <span>PRESENTE EXCLUSIVO QUE NUNCA MURCHA 🌸</span>
+          </div>
+
+          <button onclick="scrollToCatalog()" class="relative overflow-hidden inline-flex flex-col items-center justify-center w-full max-w-[330px] px-5 py-3.5 bg-gradient-to-r from-brand-ink via-[#453e39] to-brand-ink text-brand-cream font-bold rounded-xl shadow-[0_8px_20px_-4px_rgba(166,124,55,0.25)] border-2 border-brand-gold/50 transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] cursor-pointer animate-pulse-ring animate-float-subtle group">
+            <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-[150%] skew-x-[-25deg] group-hover:transition-[transform] group-hover:duration-1000 group-hover:translate-x-[150%] pointer-events-none"></span>
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] md:text-xs font-black uppercase tracking-[0.12em] text-brand-cream group-hover:text-brand-rose transition-colors">
+                QUERO VER OS BUQUÊS E PREÇOS 💐
+              </span>
+              <i data-lucide="chevron-down" class="w-4 h-4 text-brand-gold group-hover:translate-y-0.5 transition-transform duration-300"></i>
+            </div>
+            <span class="text-[8px] font-medium tracking-[0.08em] text-brand-rose/90 mt-0.5 uppercase">
+              Toque aqui para abrir o catálogo completo
+            </span>
+          </button>
+
+          <p class="text-[10px] text-brand-ink/65 font-medium tracking-wide">
+            ⭐ 4.9/5 • 100% Artesanal • Encomendas no WhatsApp • Envio Seguro
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <!-- 4. Hero Section -->
+    <section class="relative py-16 md:py-24 px-6 overflow-hidden bg-gradient-to-b from-[#FCFAF7] via-[#FFFDFC] to-[#FCFAF7] border-b border-brand-ink/5">
+      <div class="absolute inset-0 opacity-[0.03] pointer-events-none">
+        <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="lux" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#A67C37" />
+              <stop offset="100%" stop-color="transparent" />
+            </radialGradient>
+          </defs>
+          <circle cx="20%" cy="30%" r="180" fill="url(#lux)" />
+          <circle cx="80%" cy="70%" r="280" fill="url(#lux)" />
+        </svg>
+      </div>
+
+      <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center relative z-10">
+        <div class="space-y-8 lg:col-span-7 text-left">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-brand-gold/10 text-brand-gold text-[9.5px] font-bold uppercase tracking-[0.22em] rounded-full">
+            <span class="w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse"></span>
+            Presentes Únicos Feitos à Mão Para Emocionar ✨
+          </div>
+
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-serif leading-[1.12] text-brand-ink font-light tracking-tight">
+            Não entregue flores comuns.<br />
+            <span class="font-normal italic text-brand-gold relative inline-block mt-2">
+              Presenteie com um sentimento eterno.
+              <span class="absolute left-0 bottom-1 w-full h-[3px] bg-brand-rose opacity-40 rounded"></span>
+            </span>
+          </h2>
+
+          <p class="text-brand-ink/80 text-base md:text-lg font-light leading-relaxed max-w-xl">
+            Cada pétala de cetim nobre é pacientemente moldada à mão em nosso ateliê artesanal, costurando memórias com brilho acetinado e toque perfumado de flores reais que <strong class="text-brand-ink font-semibold border-b border-brand-rose pb-0.5">nunca murcham ou perdem a graça</strong>. A prova de afeto definitiva para tocar a alma de quem você mais ama. 💝
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
+            <button onclick="scrollToCatalog()" class="px-10 py-5 bg-brand-ink text-brand-cream rounded-full text-xs font-bold uppercase tracking-[0.16em] hover:bg-brand-gold transition-all duration-300 text-center shadow-2xl shadow-brand-ink/20 hover:-translate-y-1 cursor-pointer">
+              Escolher meu presente 💌
+            </button>
+            <a href="https://wa.me/5516993161762?text=Olá!%20Vi%20os%20buquês%20artesanais%20no%20ateliê%20e%20gostaria%20de%20ajuda%20para%20escolher%20um%20presente%20perfeito%20para%20alguém%20muito%20especial!%20💐" target="_blank" rel="noopener noreferrer" class="px-8 py-5 bg-white border border-brand-ink/10 text-brand-scale rounded-full text-xs font-bold uppercase tracking-[0.12em] hover:bg-brand-soft hover:shadow-lg transition-all duration-300 text-center flex items-center justify-center gap-2 hover:-translate-y-1 font-sans text-brand-ink">
+              <i data-lucide="message-circle" class="w-4 h-4 text-[#25D366]"></i>
+              <span>Quero Surpreender Alguém ❤️</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="relative lg:col-span-5 group">
+          <div class="absolute -inset-2 bg-gradient-to-tr from-brand-rose via-brand-gold to-brand-rose rounded-[3.2rem] opacity-35 blur-2xl group-hover:opacity-45 transition duration-700"></div>
+          <div class="relative aspect-[4/5] rounded-[2.8rem] overflow-hidden shadow-2xl border-[10px] border-white transform lg:rotate-2 group-hover:rotate-0 transition-transform duration-500">
+            <img src="https://i.imgur.com/XEKHUk8.png" alt="Destaque Presente Bucólico e Emocionador" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-ink/30 via-transparent to-transparent pointer-events-none"></div>
+          </div>
+
+          <div class="absolute -bottom-8 -left-3 md:-left-8 bg-white/95 backdrop-blur-md p-5 rounded-2xl shadow-2xl space-y-2 max-w-[240px] border border-brand-rose/10 text-left z-20">
+            <div class="flex gap-0.5 text-brand-gold" id="hero-stars">
+              <!-- Render stars -->
+            </div>
+            <p class="text-[10px] font-medium tracking-tight text-brand-ink leading-relaxed font-sans">
+              "Foi o presente mais lindo que já ganhei! Cada flor é impecável e tem um brilho e um acabamento que deixam qualquer um apaixonado."
+            </p>
+            <p class="text-[8px] uppercase tracking-widest text-[#B5945B] font-bold leading-none pt-1">
+              — Amanda Reis • Noiva
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Core Benefits -->
+    <section class="py-16 bg-[#FAF9F5] border-b border-brand-ink/5 px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12" id="benefits-grid">
+          <!-- Render benefits dynamicly -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Occasions Section -->
+    <section class="py-20 px-6 bg-[#FCFAF7] border-b border-brand-ink/5">
+      <div class="max-w-6xl mx-auto text-center space-y-4">
+        <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-[#B5945B]">
+          Momentos de Puro Afeto 💝
+        </span>
+        <h2 class="text-3xl md:text-4xl font-serif text-brand-ink">
+          Para qual ocasião você deseja criar memórias?
+        </h2>
+        <p class="text-brand-ink/50 text-xs md:text-sm max-w-lg mx-auto leading-relaxed font-sans">
+          Nossas criações não são apenas arranjos, são símbolos eternos de momentos inestimáveis do coração.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-12 text-left" id="occasions-grid">
+          <!-- Render occasions -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Curation Favorites Selection Curation -->
+    <section class="py-20 px-6 max-w-6xl mx-auto border-b border-brand-ink/5">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12">
+        <div class="space-y-3 text-left">
+          <span class="text-[10px] font-bold uppercase tracking-[0.25em] text-[#B5945B] block">
+            Destaques Recomendados
+          </span>
+          <h2 class="text-3xl font-serif">
+            Nossos Favoritos para <span class="italic text-brand-gold font-serif" id="curation-emotional-text">Emocionar e Surpreender ✨</span>
+          </h2>
+          <p class="text-brand-ink/55 text-xs font-light max-w-lg leading-relaxed font-sans">
+            Ideias marcantes de presentes para surpreender em datas especiais. Toque nas abas rápidas abaixo para mudar a seleção e ver fotos em ambiente real.
+          </p>
+        </div>
+
+        <!-- Filter Buttons list -->
+        <div class="flex flex-wrap gap-2 pt-2 md:pt-0" id="curation-theme-tags">
+          <!-- Loaded dynamically -->
+        </div>
+      </div>
+
+      <!-- Favorites dynamic cards slider matrix -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left" id="curation-favorites-grid">
+        <!-- Renders dynamic curation item list cards -->
+      </div>
+    </section>
+
+    <!-- 8. Complete Dynamic Product Catalog -->
+    <section id="catalogo" class="py-20 px-6 max-w-6xl mx-auto scroll-mt-10">
+      <div class="text-center space-y-4 mb-16">
+        <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-[#B5945B]">
+          Galeria do Ateliê
+        </span>
+        <h2 class="text-3xl md:text-4xl font-serif">Escolha o seu Presente</h2>
+        <p class="text-brand-ink/50 text-xs md:text-sm max-w-lg mx-auto leading-relaxed font-sans">
+          Navegue pelas coleções, confira os modelos e adicione itens especiais para deixar seu presente perfeito. Tudo é preparado com muito carinho e vai super protegido.
+        </p>
+      </div>
+
+      <!-- Limited availability banner -->
+      <div class="max-w-xl mx-auto mb-16 bg-amber-50/40 backdrop-blur-sm border border-brand-gold/15 p-5 rounded-2xl flex items-center gap-4 shadow-sm text-left font-sans">
+        <span class="w-3.5 h-3.5 rounded-full bg-[#B5945B]/20 flex items-center justify-center shrink-0">
+          <span class="w-2 h-2 rounded-full bg-[#B5945B] animate-pulse"></span>
+        </span>
+        <div>
+          <h4 class="text-xs font-bold text-brand-ink uppercase tracking-wider">
+            Disponibilidade de Produção Limitada
+          </h4>
+          <p class="text-[11px] text-brand-ink/75 leading-relaxed font-light mt-1">
+            Cada flor e arranjo de cetim é esculpido individualmente à mão no nosso ateliê com máxima dedicação. Nossos lotes de agendamento semanal preenchem-se rapidamente por ordem de chegada no WhatsApp.
+          </p>
+        </div>
+      </div>
+
+      <!-- Categories Navigation bar -->
+      <div class="flex md:hidden justify-center mb-6">
+        <div class="flex items-center gap-1.5 py-2 px-4 rounded-full bg-brand-ink/5 text-brand-ink/60 border border-brand-ink/5 text-[9px] font-bold tracking-widest uppercase">
+          <span>Deslize para ver as categorias</span>
+          <i data-lucide="chevron-down" class="w-3 h-3 text-brand-gold -rotate-90"></i>
+        </div>
+      </div>
+
+      <nav class="mb-14 overflow-x-auto no-scrollbar scroll-smooth">
+        <div class="flex justify-start md:justify-center gap-8 items-center border-b border-brand-ink/5 pb-4 px-4 md:px-0 min-w-max mx-auto" id="categories-tabs">
+          <!-- Render category header tabs -->
+        </div>
+      </nav>
+
+      <!-- Grid of current items -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20 gap-x-12 scroll-mt-28" id="catalog-products-grid">
+        <!-- Render current category list of products -->
+      </div>
+    </section>
+
+    <!-- 9. Social Proof / testimonials -->
+    <section class="max-w-6xl mx-auto px-6 py-20 border-t border-brand-ink/5">
+      <div class="text-center space-y-4 mb-20 animate-fade-in">
+        <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-gold">Relatos e Carinho</span>
+        <h2 class="text-3xl md:text-4xl font-serif">Arranjos que guardam <span class="italic text-brand-gold">memórias</span></h2>
+        <p class="text-brand-ink/40 text-xs md:text-sm max-w-lg mx-auto leading-relaxed font-sans">
+          Mais do que buquês artesanais, costuramos e perfumamos sorrisos que não murcham.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Main testimonial -->
+        <div class="md:col-span-2 p-8 md:p-12 rounded-[2.8rem] bg-white border border-brand-ink/5 shadow-sm space-y-8 flex flex-col justify-between hover:border-brand-gold/15 transition-all duration-300">
+          <div class="space-y-6 text-left font-sans">
+            <div class="flex gap-0.5 text-brand-gold" id="proof-stars-1"></div>
+            <p class="text-lg md:text-2xl font-serif text-brand-ink leading-relaxed font-light">
+              "Quando meu buquê chegou, parecia um sonho! É extremamente perfumado e as flores de cetim são impecáveis e super firmes. Usei no meu casamento e todo mundo perguntou de onde era. O melhor de tudo é saber que vou guardar essa lembrança linda decorando a minha casa para sempre!"
+            </p>
+          </div>
+          <div class="flex items-center gap-4.5 border-t border-brand-ink/5 pt-8 text-left font-sans">
+            <div class="w-11 h-11 rounded-full bg-brand-rose/25 text-brand-gold flex items-center justify-center font-bold text-xs uppercase">
+              LS
+            </div>
+            <div>
+              <p class="text-xs font-bold uppercase tracking-wider text-brand-ink">Letícia Santos</p>
+              <p class="text-[9px] text-[#B5945B]">Noiva de Casamento</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-8 rounded-[2.8rem] bg-brand-soft border border-brand-ink/5 shadow-sm space-y-8 flex flex-col justify-between hover:border-brand-gold/15 transition-all">
+          <div class="space-y-6 text-left font-sans">
+            <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-brand-gold shadow-sm">
+              <i data-lucide="quote" class="w-4 h-4 text-brand-gold"></i>
+            </div>
+            <p class="text-xs md:text-sm text-brand-ink/75 italic leading-relaxed font-light">
+              "Eu estava na dúvida de qual presente dar para a minha mãe até falar com o ateliê no WhatsApp. Eles foram fofos demais, me ajudaram a escolher as cores e o envio foi voando. Quando ela abriu e sentiu aquele perfume especial, chorou de emoção!"
+            </p>
+          </div>
+          <div class="flex items-center gap-4 text-left font-sans">
+            <div class="w-9 h-9 rounded-full bg-brand-ink/5 flex items-center justify-center text-brand-ink font-bold text-xs">
+              RO
+            </div>
+            <div>
+              <p class="text-[10px] font-bold text-brand-ink">Ricardo Oliveira</p>
+              <p class="text-[9px] text-green-600 font-bold uppercase tracking-wide">✔ Compra Autêntica</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-8 rounded-[2.8rem] bg-white border border-brand-ink/5 hover:border-brand-gold/15 transition-all text-left space-y-4 font-sans">
+          <p class="text-xs text-brand-ink/70 leading-relaxed font-light">
+            "As fotos já são lindas, mas ver pessoalmente é outra coisa! O cetim é de altíssima qualidade, brilha muito e fica maravilhoso decorando minha cabeceira. Já estou encomendando os chaveiros para dar de lembrancinha!"
+          </p>
+          <p class="text-[9px] font-bold uppercase tracking-widest text-[#B5945B]">— Beatriz Farias</p>
+        </div>
+
+        <div class="p-8 rounded-[2.8rem] bg-brand-ink text-brand-cream border border-brand-ink/5 flex flex-col justify-between text-left space-y-4 font-sans">
+          <p class="text-xs text-brand-cream/80 leading-relaxed font-light">
+            "Fiquei com medo de amassar no envio pelos Correios, mas chegou impecável! Muito cheiroso, super bem protegido e com a caixinha embalada pronta para presentear. Minha namorada amou a surpresa!"
+          </p>
+          <p class="text-[9px] font-bold uppercase tracking-wider text-brand-rose">— João Pedro • Belo Horizonte</p>
+        </div>
+
+        <div class="p-8 rounded-[2.8rem] bg-brand-gold/5 border border-brand-gold/15 flex flex-col justify-center items-center text-center space-y-4 font-sans">
+          <div class="flex -space-x-3.5">
+            <div class="w-8 h-8 rounded-full border-2 border-white bg-brand-rose/40"></div>
+            <div class="w-8 h-8 rounded-full border-2 border-white bg-brand-ink/30"></div>
+            <div class="w-8 h-8 rounded-full border-2 border-white bg-brand-gold/30"></div>
+          </div>
+          <p class="text-[10px] font-bold uppercase tracking-widest text-brand-ink">Centenas de corações conquistados</p>
+          <button onclick="scrollToCatalog()" class="w-10 h-10 rounded-full bg-brand-ink hover:bg-brand-gold text-brand-cream flex items-center justify-center transition-colors cursor-pointer">
+            <i data-lucide="arrow-right" class="w-4 h-4 text-white"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. Who We Are brand presentation -->
+    <section class="max-w-5xl mx-auto px-6 mb-32 py-16 border-t border-brand-ink/5 flex flex-col md:flex-row items-center gap-16">
+      <div class="w-full md:w-1/2 space-y-6 text-left font-sans">
+        <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-[#B5945B]">
+          Nossa Essência
+        </span>
+        <h2 class="text-3xl md:text-4xl font-serif leading-tight text-brand-ink">
+          Feito com carinho e o <span class="italic text-brand-gold">cuidado</span> que seu presente merece
+        </h2>
+        <div class="space-y-4 text-brand-ink/75 text-sm leading-relaxed font-light">
+          <p>
+            A <strong class="text-brand-ink font-semibold">A Cada Pétala</strong> nasceu de uma ideia simples e carinhosa: criar presentes feitos para durar e que guardam carinho de verdade. Em nosso ateliê, cada flor é feita à mão com muito cuidado e dedicação usando lindas fitas de cetim.
+          </p>
+          <p>
+            Enquanto as flores de verdade murcham bem rápido, as nossas flores de cetim continuam lindas, arrumadas e com o mesmo brilho por muitos anos. Elas vêm com um perfume delicioso de flores e um lindo laço de fita, perfeitas para decorar a cabeceira, a estante ou o quarto.
+          </p>
+          <p class="italic text-[#A67C37]">
+            "Não fazemos flores de plástico sem graça. Criamos presentes cheios de sentimento para tocar o coração de quem você ama."
+          </p>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 relative lg:mt-0 mt-8">
+        <div class="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border border-brand-ink/5 relative bg-brand-soft">
+          <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&q=80&w=1000" alt="Processo artesanal flor de cetim" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-ink/40 to-transparent"></div>
+
+          <div class="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md p-6 rounded-2xl border border-brand-ink/5 shadow-2xl text-left font-sans">
+            <p class="text-[9px] font-bold uppercase tracking-widest text-[#A67C37]">Feito Sob Encomenda</p>
+            <p class="text-[11px] text-brand-ink/80 leading-normal font-medium mt-1 font-sans">
+              Cada detalhe é único. Fazemos tudo com calma e muita paciência para garantir que o seu presente chegue cheiroso, impecável e perfeito.
+            </p>
+          </div>
+        </div>
+        <div class="absolute -top-12 -right-12 w-44 h-44 rounded-full bg-brand-rose/20 blur-3xl -z-10"></div>
+        <div class="absolute -bottom-12 -left-12 w-44 h-44 rounded-full bg-brand-gold/10 blur-3xl -z-10"></div>
+      </div>
+    </section>
+
+    <!-- 11. FAQ Accordion section -->
+    <section class="bg-[#FAF9F5] py-24 border-t border-b border-brand-ink/5 px-6">
+      <div class="max-w-3xl mx-auto text-left">
+        <h2 class="text-3xl font-serif text-center mb-14 text-brand-ink">Dúvidas Frequentes</h2>
+        <div class="space-y-4" id="faq-accordions-container">
+          <!-- Render FAQ Items dynamicly -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. Consulting Section direct call -->
+    <section class="py-20 px-6 max-w-4xl mx-auto font-sans">
+      <div class="bg-brand-ink text-[#FFFDFC] rounded-[3.5rem] p-10 md:p-16 text-center space-y-8 shadow-2xl relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-32 h-32 rounded-full bg-brand-rose/10 blur-2xl"></div>
+        <div class="absolute bottom-0 left-0 w-32 h-32 rounded-full bg-brand-gold/10 blur-2xl"></div>
+
+        <div class="space-y-4 relative z-10 text-center flex flex-col items-center">
+          <span class="text-[10px] font-bold uppercase tracking-[0.25em] text-[#B5945B]">Escolha Perfeita</span>
+          <h2 class="text-3xl md:text-4xl font-serif leading-tight text-white font-light text-center">
+            Ficou com dúvida sobre as <span class="italic text-brand-rose font-serif">cores e laços</span>?
+          </h2>
+          <p class="text-brand-cream/65 text-xs md:text-sm max-w-lg mx-auto leading-relaxed font-light text-center">
+            Diga-nos qual a ocasião ou sentimento! Nós te ajudamos a escolher as melhores cores, o tipo de embalagem e a frase para o bilhete direto em nosso WhatsApp, com um atendimento rápido e super amigável.
+          </p>
+        </div>
+
+        <div class="pt-2 relative z-10 flex justify-center">
+          <a href="https://wa.me/5516993161762?text=Ol%C3%A1!%20Fiquei%20com%20uma%20d%C3%BAvida%20sobre%20as%20cores%20dos%20buqu%C3%AAs%20e%20gostaria%20que%20me%20ajudassem%20a%20escolher%20para%20presente.%20💐" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 px-12 py-5 bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full text-xs font-bold uppercase tracking-widest transition-all shadow-xl shadow-green-600/10 hover:-translate-y-0.5 cursor-pointer font-sans duration-300">
+            <i data-lucide="message-circle" class="w-4 h-4 fill-white text-white"></i>
+            <span>Conversar no WhatsApp 💐</span>
+          </a>
+        </div>
+
+        <div class="flex justify-center items-center gap-6 text-[10px] text-brand-cream/40 font-bold uppercase tracking-wider relative z-10 font-sans">
+          <span class="flex items-center gap-1">
+            <i data-lucide="award" class="w-3.5 h-3.5 text-brand-gold"></i> Toque Artístico
+          </span>
+          <span>•</span>
+          <span class="flex items-center gap-1">
+            <i data-lucide="truck" class="w-3.5 h-3.5 text-brand-gold"></i> Envio com total proteção
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. Shopee direct promo -->
+    <section class="py-12 bg-[#FCFAF7] border-t border-brand-ink/5 px-6 text-center font-sans">
+      <div class="max-w-md mx-auto space-y-4">
+        <p class="text-xs text-brand-ink/45 leading-relaxed font-light">
+          Deseja parcelar ou prefere a proteção de checkout da Shopee?
+        </p>
+        <a href="https://shopee.com.br/a_cada_petala" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-bold text-brand-ink/75 hover:text-brand-gold transition-colors border-b border-brand-ink/10 pb-0.5 tracking-wide">
+          <span>🛍️ Prefere comprar pela Shopee? Clique aqui.</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 14. Footer -->
+    <footer class="py-16 px-6 border-t border-brand-ink/5 text-center bg-white/30 font-sans">
+      <div class="max-w-lg mx-auto space-y-10">
+        <div class="space-y-4">
+          <h2 class="text-2xl font-serif font-light text-brand-ink">A Cada Pétala</h2>
+          <p class="text-[10px] text-brand-ink/50 leading-relaxed font-bold uppercase tracking-[0.2em]">
+            Presidente Epitácio - SP • Ateliê de Flores em Fita de Cetim
+          </p>
+        </div>
+
+        <div class="flex justify-center gap-8 text-brand-ink/50">
+          <a href="https://instagram.com/a_cada_petala" target="_blank" rel="noopener noreferrer" class="hover:text-brand-gold transition-colors">
+            <i data-lucide="instagram" class="w-5 h-5"></i>
+          </a>
+          <a href="https://wa.me/5516993161762" target="_blank" rel="noopener noreferrer" class="hover:text-[#25D366] transition-colors">
+            <i data-lucide="message-circle" class="w-5 h-5"></i>
+          </a>
+        </div>
+
+        <p class="text-[9.5px] text-brand-ink/30 font-medium uppercase tracking-widest leading-relaxed">
+          © 2026 A Cada Pétala. Feito à mão com todo o carinho.
+        </p>
+      </div>
+    </footer>
+
+
+    <!-- 15. Floating Bag Button badge -->
+    <div id="floating-cart-btn" class="fixed top-8 right-8 z-[110] hidden flex flex-col items-end gap-2.5 max-w-[280px]">
+      <button onclick="openCartDrawer()" class="relative w-14 h-14 bg-brand-ink text-brand-cream rounded-full flex items-center justify-center shadow-2xl hover:scale-105 active:scale-95 transition-all group cursor-pointer border border-[#E9D5D8]/20 animate-bounce-subtle">
+        <i data-lucide="shopping-bag" class="w-5 h-5 text-brand-cream"></i>
+        <span id="floating-cart-badge" class="absolute -top-1 -right-1 w-6 h-6 bg-brand-gold text-white text-[10px] font-black rounded-full flex items-center justify-center border-2 border-brand-cream">
+          0
+        </span>
+      </button>
+
+      <!-- Visual Attention CTA Badge -->
+      <div id="cart-cta-message" class="bg-brand-gold text-white px-3.5 py-2.5 rounded-2xl shadow-xl flex items-center justify-between gap-2.5 border border-white/20 select-none animate-bounce-subtle relative cursor-pointer" onclick="openCartDrawer()">
+        <span class="flex items-center gap-1.5 shrink-0 text-[10px] font-extrabold uppercase tracking-widest leading-none">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
+          </span>
+          SEU MIMO ESTÁ NA CESTA! VER 🛒
+        </span>
+        <div class="absolute -top-1 right-6 w-2.5 h-2.5 bg-brand-gold rotate-45 border-t border-l border-white/10"></div>
+      </div>
+    </div>
+
+    <!-- 16. Floating WhatsApp widget bottom-right -->
+    <div class="fixed bottom-6 right-6 z-[100]" id="f-whatsapp">
+      <a href="https://wa.me/5516993161762?text=Ol%C3%A1!%20Fiquei%20encantado(a)%20com%20os%20buqu%C3%AAs%20de%20cetim%20no%20seu%20site%20e%20gostaria%20de%20ajuda%20para%20escolher%20um%20presente%20perfeito.%20Pode%20me%20atender?%20💐" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-[#25D366] text-brand-ink hover:text-white border border-brand-ink/10 rounded-full pl-5 pr-4 py-2.5 shadow-2xl flex items-center gap-3 transition-all duration-300 group hover:-translate-y-1">
+        <span class="text-[9.5px] font-bold uppercase tracking-wider text-brand-ink/75 group-hover:text-white">
+          Precisa de ajuda para escolher? 💐
+        </span>
+        <div class="w-8 h-8 rounded-full bg-brand-ink group-hover:bg-white text-brand-cream group-hover:text-[#25D366] flex items-center justify-center shadow-lg transition-colors duration-300 shrink-0">
+          <i data-lucide="message-circle" class="w-4 h-4 text-current fill-none"></i>
+        </div>
+      </a>
+    </div>
+
+
+    <!-- 17. Cart Drawer element -->
+    <div id="cart-drawer-wrapper" class="fixed inset-0 z-[200] hidden overflow-hidden">
+      <!-- Backdrop mask -->
+      <div class="absolute inset-0 bg-brand-ink/35 backdrop-blur-sm transition-opacity" onclick="closeCartDrawer()"></div>
+
+      <div class="fixed inset-y-0 right-0 max-w-full flex">
+        <!-- Main panel sheet container -->
+        <div id="cart-drawer-panel" class="w-screen max-w-md bg-brand-cream shadow-2xl flex flex-col justify-between h-full transform translate-x-full cart-drawer-slider">
+          
+          <!-- Header -->
+          <div class="px-8 py-7 border-b border-brand-ink/5 flex items-center justify-between bg-white h-24 shrink-0">
+            <div class="text-left font-sans">
+              <h2 class="text-xl font-serif text-brand-ink">Sua Cesta</h2>
+              <p id="cart-drawer-item-desc" class="text-[10px] font-bold uppercase tracking-widest text-brand-gold mt-0.5">
+                0 presentes prontos
+              </p>
+            </div>
+            <button onclick="closeCartDrawer()" class="p-2 hover:bg-brand-ink/5 rounded-full transition-colors cursor-pointer">
+              <i data-lucide="x" class="w-5 h-5 text-brand-ink/40"></i>
+            </button>
+          </div>
+
+          <!-- Product stack scrollable center area -->
+          <div id="cart-drawer-items" class="flex-1 overflow-y-auto p-8 no-scrollbar space-y-6">
+            <!-- Dynamicly populated -->
+          </div>
+
+          <!-- Footer of the Cart Drawer checkout steps -->
+          <div id="cart-drawer-checkout-card" class="p-8 bg-white border-t border-brand-ink/5 space-y-4 shrink-0 hidden">
+            <div class="space-y-1 text-left font-sans">
+              <h3 class="text-[10px] font-bold uppercase tracking-wider text-[#B5945B]">Entrega ou Retirada</h3>
+              <p class="text-[10px] text-brand-ink/80 leading-relaxed font-medium">
+                Se você não mora em Presidente Epitácio-SP, o seu pedido será enviado pelos Correios. <strong class="text-[#C27D38]">Por favor, digite seu CEP obrigatório abaixo</strong> para podermos preparar o seu envio:
+              </p>
+            </div>
+
+            <!-- CEP block inside bag -->
+            <div class="space-y-2">
+              <div class="flex gap-2">
+                <input type="text" id="cart-drawer-cep-input" placeholder="Digite seu CEP (00000-000)" maxlength="9" class="w-full bg-[#FAF9F5] border border-brand-ink/10 rounded-xl px-2.5 py-2 text-xs focus:outline-none focus:border-brand-gold font-bold text-brand-ink" />
+                <button type="button" onclick="calculateShippingInBag()" class="bg-brand-ink text-brand-cream hover:bg-brand-gold px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-wider transition-colors flex items-center gap-1.5 cursor-pointer">
+                  <i data-lucide="map-pin" class="w-3.5 h-3.5 text-brand-cream"></i>
+                  <span id="bag-cep-btn-txt">OK</span>
+                </button>
+              </div>
+              <p id="bag-cep-error" class="hidden text-[9px] text-red-500 font-semibold text-left"></p>
+              <div id="bag-cep-success-card" class="hidden text-[10px] text-brand-ink/80 text-left pt-1.5 flex items-center gap-1.5 bg-brand-soft/40 p-2.5 rounded-lg border border-brand-gold/10 font-sans">
+                <span>📍</span>
+                <span id="bag-cep-success-msg" class="font-bold flex-1">CEP detectado</span>
+              </div>
+            </div>
+
+            <!-- Total formulas and sums -->
+            <div class="space-y-2 text-xs pt-1 border-t border-brand-ink/5 font-sans">
+              <div class="flex justify-between items-center text-brand-ink/50">
+                <span id="bag-selected-item-count">Mimos selecionados (0)</span>
+                <span id="bag-products-sum" class="font-bold text-brand-ink">R$ 0,00</span>
+              </div>
+              <div class="flex justify-between items-center text-brand-ink/65">
+                <span>Taxa de Envio</span>
+                <span id="bag-shipping-rate-badge" class="text-[#B5945B] font-bold bg-brand-gold/10 px-2 py-0.5 rounded text-[10px]">
+                  A combinar no WhatsApp
+                </span>
+              </div>
+              <div class="flex justify-between items-center pt-2.5 border-t border-brand-ink/5">
+                <span class="font-semibold text-brand-ink text-xs">Subtotal Geral (Sem Frete)</span>
+                <span id="bag-grand-subtotal" class="text-xl font-serif text-brand-ink font-bold">R$ 0,00</span>
+              </div>
+            </div>
+
+            <div class="text-[9.5px] text-[#C27D38] bg-[#FAF4ED] border border-[#ECD9C5]/50 px-3 py-2 rounded-lg text-left leading-normal font-medium font-sans">
+              ⚠️ <strong>Sem cobrança extra aqui:</strong> O pagamento dos mimos e as cores do cetim serão definidos em nosso chat de WhatsApp logo após clicar abaixo!
+            </div>
+
+            <button onclick="checkoutToWhatsApp()" class="w-full bg-[#25D366] text-white py-4 rounded-xl text-[10.5px] font-black uppercase tracking-[0.12em] flex items-center justify-center gap-2.5 hover:bg-[#128C7E] transition-colors shadow-lg shadow-green-600/10 cursor-pointer font-sans duration-300">
+              <i data-lucide="message-circle" class="w-4 h-4 fill-white text-white"></i>
+              <span>Enviar Pedido pelo WhatsApp</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 18. Centralized Application JavaScript Data & Engine Controllers -->
+    <script>
+      // ----------------------------------------------------
+      // SYSTEM DATA CATALOG
+      // ----------------------------------------------------
+      const ALL_ADDONS = [
+        { id: "b_3d", name: "Borboleta 3D", price: 3.5 },
+        { id: "b_3d_m", name: "Mini Borboleta 3D", price: 2.0 },
+        { id: "note", name: "Bilhete com Recado Impresso", price: 5.0 },
+        { id: "led", name: "Luz de led brilhante", price: 7.0 },
+        { id: "crown", name: "Coroa", price: 35.0 },
+        { id: "ribbon", name: "Faixa Frase Personalizada", price: 20.0 },
+        { id: "photo", name: "Foto Revelada Polaroid", price: 5.0 },
+        { id: "choco", name: "Bombom", price: 2.5 },
+        { id: "ferrero", name: "Ferrero Rocher", price: 4.5 },
+        { id: "glitter", name: "Glitter sobre Pétalas", price: 1.0 }
+      ];
+
+      const PRODUCTS = [
+        {
+          id: "rose-cl",
+          category: "Rosas",
+          name: "Buquês de Rosas Clássicos",
+          badge: "Mais Vendido 🔥",
+          image: "https://i.imgur.com/SbIRggE.png",
+          options: [
+            { label: "3 rosas", price: 50 },
+            { label: "5 rosas", price: 65 },
+            { label: "8 rosas", price: 90 },
+            { label: "15 rosas", price: 140 },
+            { label: "20 rosas", price: 190 },
+            { label: "30 rosas", price: 230 },
+            { label: "50 rosas", price: 380 }
+          ]
+        },
+        {
+          id: "rose-tem",
+          category: "Rosas",
+          name: "Buquês de Rosas Temáticos",
+          badge: "Favorito para Presente 💝",
+          image: "https://i.imgur.com/LYwQbmO.jpeg",
+          options: [
+            { label: "3 rosas com detalhes", price: 65 },
+            { label: "5 rosas com detalhes", price: 80 },
+            { label: "8 rosas com detalhes", price: 110 },
+            { label: "15 rosas com detalhes", price: 160 },
+            { label: "20 rosas com detalhes", price: 210 },
+            { label: "30 rosas com detalhes", price: 250 },
+            { label: "50 rosas com detalhes", price: 400 }
+          ]
+        },
+        {
+          id: "sun-cl",
+          category: "Girassóis",
+          name: "Buquês de Girassol Clássicos",
+          badge: "Sucesso de Vendas ✨",
+          image: "https://i.imgur.com/00jINgH.png",
+          options: [
+            { label: "3 girassóis", price: 75 },
+            { label: "6 girassóis", price: 120 },
+            { label: "8 girassóis", price: 150 },
+            { label: "12 girassóis", price: 200 }
+          ]
+        },
+        {
+          id: "sun-tem",
+          category: "Girassóis",
+          name: "Buquês de Girassol Temáticos",
+          badge: "Campanha de Sucesso 🌟",
+          image: "https://i.imgur.com/CA2IWPU.png",
+          options: [
+            { label: "3 girassóis decorados", price: 85 },
+            { label: "6 girassóis decorados", price: 130 },
+            { label: "8 girassóis decorados", price: 160 },
+            { label: "12 girassóis decorados", price: 210 }
+          ]
+        },
+        {
+          id: "but-cl",
+          category: "Borboletas",
+          name: "Buquês de Borboletas Iluminados",
+          includesLed: true,
+          badge: "Queridinho das Redes Sociais 🦋",
+          image: "https://i.imgur.com/wo2r3aM.jpeg",
+          options: [
+            { label: "7 borboletas com LED", price: 40 },
+            { label: "15 borboletas com LED", price: 65 },
+            { label: "30 borboletas com LED", price: 85 },
+            { label: "50 borboletas com LED", price: 120 },
+            { label: "70 borboletas com LED", price: 150 }
+          ]
+        },
+        {
+          id: "but-tem",
+          category: "Borboletas",
+          name: "Buquês de Borboletas Temáticos (LED)",
+          includesLed: true,
+          badge: "Brilhante e Encantador ✨",
+          image: "https://i.imgur.com/2FIlUkQ.jpeg",
+          options: [
+            { label: "7 borboletas com LED", price: 45 },
+            { label: "15 borboletas com LED", price: 70 },
+            { label: "30 borboletas com LED", price: 90 },
+            { label: "50 borboletas com LED", price: 125 },
+            { label: "70 borboletas com LED", price: 155 }
+          ]
+        },
+        {
+          id: "unit-fl",
+          category: "Flores Unitárias",
+          name: "Flores de Cetim Unitárias",
+          badge: "Mimo Lindo e Delicado 🌸",
+          image: "https://i.imgur.com/FsgsnFi.png",
+          options: [
+            { label: "Rosa de Cetim", price: 25, image: "https://i.imgur.com/FsgsnFi.png" },
+            { label: "Tulipa Linda", price: 28, image: "https://i.imgur.com/9sjtZ5v.png" },
+            { label: "Dália Linda", price: 28, image: "https://i.imgur.com/7b4laMi.png" },
+            { label: "Girassol de Cetim", price: 30, image: "https://i.imgur.com/ODsHRSu.png" },
+            { label: "Margarida Linda", price: 30, image: "https://i.imgur.com/JarVJBG.png" },
+            { label: "Lírio Lindo", price: 40, image: "https://i.imgur.com/TNZTqtb.png" }
+          ],
+          customAddOns: [
+            { id: "b_3d", name: "Borboleta 3D", price: 3.5 },
+            { id: "b_3d_m", name: "Mini Borboleta 3D", price: 2.0 },
+            { id: "note", name: "Bilhete com Recado", price: 5.0 },
+            { id: "led", name: "Luz de led", price: 7.0 },
+            { id: "photo", name: "Foto polaroide", price: 5.0 },
+            { id: "glitter", name: "Glitter", price: 1.0 }
+          ]
+        },
+        {
+          id: "caneta",
+          category: "Flores Unitárias",
+          name: "Caneta Decorada com Flor",
+          badge: "Mimo Fofo e Útil ✍️",
+          image: "https://i.imgur.com/BQkYxq4.png",
+          options: [
+            { label: "Caneta Girassol", price: 15, image: "https://i.imgur.com/cEo5P9B.png" },
+            { label: "Caneta Tulipa", price: 15, image: "https://i.imgur.com/BQkYxq4.png" },
+            { label: "Caneta Rosa", price: 15, image: "https://i.imgur.com/QS4P6RR.png" }
+          ],
+          customAddOns: [
+            { id: "name_extra", name: "Nome Gravado", price: 5.0 }
+          ]
+        },
+        {
+          id: "chaveiro-mini",
+          category: "Chaveiros",
+          name: "Chaveirinho de Mini Buquê (7cm)",
+          badge: "Charmoso e Único 🔑",
+          image: "https://i.imgur.com/YqWGc1r.jpeg",
+          options: [{ label: "1 Unidade Delicada", price: 20 }],
+          customAddOns: []
+        },
+        {
+          id: "chaveiro-rosa",
+          category: "Chaveiros",
+          name: "Chaveirinho Balão de Rosa",
+          badge: "Muita Fofura 🌹",
+          image: "https://i.imgur.com/NnaRRhw.jpeg",
+          options: [{ label: "1 Unidade Delicada", price: 15 }],
+          customAddOns: []
+        },
+        {
+          id: "chaveiro-girassol",
+          category: "Chaveiros",
+          name: "Chaveirinho Girassol",
+          badge: "Lindo e Alegre 🌻",
+          image: "https://i.imgur.com/ztapRmK.jpeg",
+          options: [{ label: "1 Unidade Delicada", price: 15 }],
+          customAddOns: []
+        },
+        {
+          id: "custom-buque",
+          category: "Monte o Seu",
+          name: "Monte seu Buquê Personalizado",
+          badge: "Escolha Suas Cores 🎨",
+          image: "https://i.imgur.com/E07BXF9.png",
+          options: [{ label: "Fazer orçamento sem compromisso", price: 0 }]
+        }
+      ];
+
+      const CATEGORIES = [
+        "Rosas",
+        "Girassóis",
+        "Borboletas",
+        "Flores Unitárias",
+        "Chaveiros",
+        "Monte o Seu"
+      ];
+
+      const FAQ_ITEMS = [
+        {
+          q: "Qual o prazo de produção?",
+          a: "Como fazemos cada flor à mão com todo o carinho, o prazo de produção é de 2 a 3 dias úteis antes do envio ou entrega local."
+        },
+        {
+          q: "Como eu escolho as cores e o recado do bilhete?",
+          a: "Fique super tranquilo(a)! Logo depois que você fizer o seu pedido no site, nós te chamamos no WhatsApp para escolhermos juntos cada detalhe, como cor de cetim, laços e o seu bilhete de dedicatória."
+        },
+        {
+          q: "Como funciona a entrega para fora de Presidente Epitácio?",
+          a: "Você pode colocar o seu CEP aqui no carrinho do site para ver de qual localidade você é. Depois, combinamos a melhor forma de envio e frete direto pelo WhatsApp com o ateliê."
+        },
+        {
+          q: "As fitas de cetim estragam ou perdem o brilho?",
+          a: "Não! Usamos fitas de cetim de alta qualidade e com acabamento especial para não desfiar. Elas permanecem lindas, brilhantes e limpas por muitos anos."
+        }
+      ];
+
+      const CURATION_THEMES = [
+        { label: "Românticos ❤️", text: "Emocionar seu Amor", pool: ["rose-tem", "but-cl", "rose-cl"] },
+        { label: "Aniversários 🎂", text: "Surpreender no Aniversário", pool: ["sun-tem", "but-tem", "unit-fl"] },
+        { label: "Pequenos Mimos 🎁", text: "Celebrar com Delicadeza", pool: ["chaveiro-mini", "caneta", "chaveiro-rosa"] },
+        { label: "Girassóis Radiantes 🌻", text: "Espalhar Luz e Alegria", pool: ["sun-tem", "sun-cl", "chaveiro-girassol"] },
+        { label: "Carinho e Família 💞", text: "Celebrar Quem de Fato Importa", pool: ["rose-tem", "sun-tem", "rose-cl"] },
+        { label: "Formaturas/Sucesso 🎓", text: "Brindar Grandes Conquistas", pool: ["sun-tem", "rose-cl", "caneta"] },
+        { label: "Agradecimentos 🙏", text: "Demonstrar sua Gratidão", pool: ["caneta", "sun-cl", "unit-fl"] },
+        { label: "Monte o Seu 🎨", text: "Dar seu Toque de Personalidade", pool: ["custom-buque", "rose-tem", "but-cl"] }
+      ];
+
+      const FAVORITES_POOL = {
+        "rose-tem": {
+          id: "rose-tem",
+          category: "Rosas",
+          name: "Buquê de Rosas Temático",
+          badge: "Perfeito para Presente! 💝",
+          price: 65.0,
+          description: "Lindo buquê de rosas em cetim com detalhe de coroa ou bilhetinho romântico. O campeão de pedidos!",
+          image: "https://i.imgur.com/LYwQbmO.jpeg",
+          emotionalText: "Coroa luxuosa e detalhes que coroam o amor da sua vida com requinte. ✨",
+          urgencyText: "Apenas 4 vagas esta semana"
+        },
+        "but-cl": {
+          id: "but-cl",
+          category: "Borboletas",
+          name: "Buquê de Borboletas Iluminado",
+          badge: "Sucesso das Redes Social 🦋",
+          price: 40.0,
+          description: "Lindo efeito com borboletas bem delicadas e luzinhas de LED brilhantes que encantam e enfeitam o quarto de noite.",
+          image: "https://i.imgur.com/wo2r3aM.jpeg",
+          emotionalText: "As borboletas representam transformação, e combinadas com LED criam uma atmosfera aconchegante e romântica. 🦋",
+          urgencyText: "Campeão de vendas • Alta procura"
+        },
+        "rose-cl": {
+          id: "rose-cl",
+          category: "Rosas",
+          name: "Buquê de Rosas Clássico",
+          badge: "Mais Escolhido ✨",
+          price: 50.0,
+          description: "Nossos buquês de rosas vermelhas ou rosa claro feitos à mão com muito carinho e perfume suave especial.",
+          image: "https://i.imgur.com/SbIRggE.png",
+          emotionalText: "O símbolo supremo da paixão em pétalas acetinadas perfumadas que duram para sempre. ❤️",
+          urgencyText: "Feito sob encomenda • Produção limitada"
+        },
+        "sun-tem": {
+          id: "sun-tem",
+          category: "Girassóis",
+          name: "Buquê de Girassol Radiante",
+          badge: "Muito Brilho e Alegria 🌻",
+          price: 85.0,
+          description: "Os girassóis de cetim trazem luz e boas energias para quem recebe. Um presente inesquecível de longa duração.",
+          image: "https://i.imgur.com/CA2IWPU.png",
+          emotionalText: "Uma explosão de energy positiva com coroa dourada para surpreender e brilhar. ☀️",
+          urgencyText: "Edição exclusiva do ateliê"
+        },
+        "sun-cl": {
+          id: "sun-cl",
+          category: "Girassóis",
+          name: "Buquê de Girassol Clássico",
+          badge: "Super Alegre ☀️",
+          price: 75.0,
+          description: "Girassóis amarelos brilhantes feitos um a um para enfeitar e arrancar sorrisos sinceros.",
+          image: "https://i.imgur.com/00jINgH.png",
+          emotionalText: "Para iluminar o dia e aquecer o coração de quem traz sol para a sua vida. 🌻",
+          urgencyText: "Produção limitada sob demanda"
+        },
+        "but-tem": {
+          id: "but-tem",
+          category: "Borboletas",
+          name: "Buquê de Borboletas Imperial",
+          badge: "Lindo e Iluminado ✨",
+          price: 45.0,
+          description: "Um buquê incrível com borboletas e luzinhas de LED brilhantes, embalado para presente com papel especial.",
+          image: "https://i.imgur.com/2FIlUkQ.jpeg",
+          emotionalText: "Encanto noturno cintilante e fitas luxuosas que parecem flutuar em um conto de fadas. ✨",
+          urgencyText: "Edição limitada de cetim"
+        },
+        "unit-fl": {
+          id: "unit-fl",
+          category: "Flores Unitárias",
+          name: "Flores de Cetim Unitárias",
+          badge: "Fofura e Delicadeza 🌸",
+          price: 25.0,
+          description: "Uma linda rosa, dália ou tulipa de cetim avulsa em embalagem moderna e fofa. A lembrancinha ideal.",
+          image: "https://i.imgur.com/FsgsnFi.png",
+          emotionalText: "Um mimo delicado e inesquecível para expressar carinho nos pequenos detalhes. 🌸",
+          urgencyText: "Peça artesanal exclusiva"
+        },
+        "chaveiro-mini": {
+          id: "chaveiro-mini",
+          category: "Chaveiros",
+          name: "Chaveirinho Mini Buquê",
+          badge: "Fofura sem igual! 🎀",
+          price: 20.0,
+          description: "Um mini buquezinho super fofo em formato de chaveiro para colocar nas suas chaves ou na bolsa.",
+          image: "https://i.imgur.com/YqWGc1r.jpeg",
+          emotionalText: "Carregue a delicadeza e o carinho do nosso ateliê artesanal sempre bem pertinho de você! 🎀",
+          urgencyText: "Poucas peças em estoque"
+        },
+        "chaveiro-girassol": {
+          id: "chaveiro-girassol",
+          category: "Chaveiros",
+          name: "Chaveiro Girassol de Cetim",
+          badge: "Alegria no bolso 🌻",
+          price: 15.0,
+          description: "Mini chaveiro de girassol feito à mão para iluminar o seu dia-a-dia e enfeitar o seu chaveiro.",
+          image: "https://i.imgur.com/ztapRmK.jpeg",
+          emotionalText: "Mantenha o otimismo e a felicidade brilhando nos seus momentos mais simples. 🌻",
+          urgencyText: "Disponibilidade limitada de cetim"
+        },
+        "custom-buque": {
+          id: "custom-buque",
+          category: "Monte o Seu",
+          name: "Buquê Personalizado Ateliê",
+          badge: "Crie Do Seu Jeito 🎨",
+          price: 0.0,
+          description: "Escolha as suas cores de cetim favoritas e monte o buquê dos seus sonhos em atendimento direto com a gente.",
+          image: "https://i.imgur.com/E07BXF9.png",
+          emotionalText: "Combine nuances, escolha laços suntuosos e co-crie uma obra de arte única com a artesã. 🎨",
+          urgencyText: "Vagas de co-criação concorridas"
+        },
+        "caneta": {
+          id: "caneta",
+          category: "Flores Unitárias",
+          name: "Caneta Decorada com Flor",
+          badge: "Mimo Fofo e Útil ✍️",
+          price: 15.0,
+          description: "Caneta fofa decorada com uma tulipa ou girassol de cetim feito à mão, perfeita para usar na escola ou escritório.",
+          image: "https://i.imgur.com/BQkYxq4.png",
+          emotionalText: "Escreva suas histórias com poesia com uma flor que adora enfeitar os seus dias de estudos e trabalho. ✍️",
+          urgencyText: "Edições limitadas por flor"
+        },
+        "chaveiro-rosa": {
+          id: "chaveiro-rosa",
+          category: "Chaveiros",
+          name: "Chaveiro Rosa do Amor",
+          badge: "Lembrança Romântica 🌹",
+          price: 15.0,
+          description: "Chaveiro com uma rosa de cetim super delicada para carregar sempre com você com muito carinho.",
+          image: "https://i.imgur.com/NnaRRhw.jpeg",
+          emotionalText: "Um botão de rosa esculpido para carregar com carinho e expressão emocional profunda. 🌹",
+          urgencyText: "Exclusividade do ateliê"
+        }
+      };
+
+      const BENEFITS = [
+        { title: "Lembrança Eterna", desc: "Flores de cetim que duram muitos anos, mantendo o brilho e a lembrança especial intactos.", icon: "shield" },
+        { title: "Ateliê 100% Manual", desc: "Cada pétala, folha e borboleta é dobrada e montada à mão com muito carinho e capricho.", icon: "sparkles" },
+        { title: "Perfume e Embalagem", desc: "Todas as encomendas vêm prontas para presentear, com laço elegante e um aroma super fofo.", icon: "gift" },
+        { title: "Sua Cor Preferida", desc: "Depois do pedido, combinamos as cores do cetim no WhatsApp para deixar a sua lembrança com o seu estilo.", icon: "heart" }
+      ];
+
+      const OCCASIONS = [
+        { icon: "💍", title: "Romance & Pedidos de Casamento", category: "Rosas", actionText: "Ver Buquês de Rosas →", desc: "Um magnífico buquê de rosas de cetim nobre para eternizar o seu amor. Diferente das flores naturais, elas duram para sempre e farão parte da história e decoração do casal." },
+        { icon: "butterfly-placeholder", title: "Presentes Iluminados", category: "Borboletas", actionText: "Ver Buquês de Borboleta →", desc: "Torne as noites mágicas com o brilhante buquê de borboletas iluminado por LEDs. Um verdadeiro conto de fadas em forma de luz para encantar e decorar o quarto de quem você ama.", svg: "🦋" },
+        { icon: "☀️", title: "Datas Felizes & Celebrações", category: "Girassóis", actionText: "Ver Girassóis Vibrantes →", desc: "Deseje sucesso e espalhe luz com o brilho dourado e alegre dos nossos buquês de girassol de cetim. Cada pétala irradia otimismo e carinho para formaturas, conquistas ou aniversários." },
+        { icon: "✍️", title: "Pequenos Gestos & Mimos Fofos", category: "Flores Unitárias", actionText: "Ver Flores e Canetas Mimo →", desc: "Fuja do óbvio com nossas rosas ou tulipas unitárias e canetas decoradas em cetim. São mimos práticos e apaixonantes para presentear no trabalho, na faculdade ou marcar um carinho." },
+        { icon: "🔑", title: "Lembranças para o Dia a Dia", category: "Chaveiros", actionText: "Ver Chaveiros Artesanais →", desc: "Leve a beleza das flores de cetim no bolso ou na bolsa. Nossos chaveiros de mini buquês, rosas ou girassóis esculpidos à mão trazem fofura, delicadeza e afeto para toda rotina." },
+        { icon: "🎨", title: "Projetos Customizados", category: "Monte o Seu", actionText: "Monte Seu Buquê Personalizado →", desc: "Sonhe com as cores, laços suntuosos e apliques exclusivos que você deseja e crie um presente sob medida. Conecte com a nossa artesã e dê um toque de arte aos seus sentimentos." }
+      ];
+
+
+      // ----------------------------------------------------
+      // APP STATE LAYER
+      // ----------------------------------------------------
+      let cart = [];
+      let cartOpen = false;
+      let activeCategory = "Rosas";
+      let activeThemeIdx = 0;
+      let activeFaq = null;
+      let shuffledThemes = [...CURATION_THEMES];
+
+      // Cached Cep fields inside LocalStorage
+      let cartCep = localStorage.getItem("cartCep") || "";
+      let cartCity = localStorage.getItem("cartCity") || "";
+      let cartUf = localStorage.getItem("cartUf") || "";
+      let cartStreet = localStorage.getItem("cartStreet") || "";
+      let cartBairro = localStorage.getItem("cartBairro") || "";
+
+      // Track individual selections per products
+      let productSelections = {};
+
+      // ----------------------------------------------------
+      // CORE EVENT LOOPS
+      // ----------------------------------------------------
+      window.addEventListener("DOMContentLoaded", () => {
+        // Shuffling curation themes just once for dynamic flavor
+        shuffledThemes.sort(() => 0.5 - Math.random());
+        
+        // Initializing catalog configurations for each product
+        PRODUCTS.forEach(p => {
+          productSelections[p.id] = {
+            selectedIndex: 0,
+            addOns: [],
+            quantity: 1,
+            added: false,
+            addonsOpen: false
+          };
+        });
+
+        // Load cart items from localStorage if any
+        try {
+          const stored = localStorage.getItem("cadaPetalaCart");
+          if (stored) {
+            cart = JSON.parse(stored);
+          }
+        } catch (err) {
+          console.warn("Could not read cart cache", err);
+        }
+
+        // Setup input bindings for CEP elements if they exist
+        setTimeout(() => {
+          syncCepFieldValues();
+        }, 300);
+
+        // Core visual rendering loops
+        renderAllStaticElements();
+        renderCurationThemes();
+        renderFavorites();
+        renderCategoriesNavigator();
+        renderCatalog();
+        syncBagIndicatorUI();
+
+        // Initialized lucide icons
+        lucide.createIcons();
+      });
+
+      function syncCepFieldValues() {
+        const inp = document.getElementById("cart-drawer-cep-input");
+        if (inp && cartCep) {
+          inp.value = cartCep;
+        }
+      }
+
+      function scrollToCatalog() {
+        const el = document.getElementById("catalogo");
+        if (el) {
+          const y = el.getBoundingClientRect().top + window.pageYOffset - 40;
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }
+      }
+
+      // Handler dispatched from Occasions grid or Recommendations to quick swap category and slide down
+      function selectProduct(productId, category) {
+        if (category) {
+          activeCategory = category;
+          renderCategoriesNavigator();
+          renderCatalog();
+        }
+
+        setTimeout(() => {
+          const targetId = productId ? `product-${productId}` : "catalogo";
+          const element = document.getElementById(targetId);
+          if (element) {
+            const yOffset = productId ? -100 : -45;
+            const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: "smooth" });
+
+            if (productId && productSelections[productId]) {
+              productSelections[productId].addonsOpen = true;
+              renderCatalog();
+
+              // Highlight outline
+              const img = element.querySelector("img");
+              if (img) {
+                img.classList.add("scale-[1.03]");
+                setTimeout(() => img.classList.remove("scale-[1.03]"), 1200);
+              }
+            }
+          }
+        }, 120);
+      }
+
+
+      // ----------------------------------------------------
+      // CALCULATE & STATE HELPERS
+      // ----------------------------------------------------
+      function getAddonsPool(product) {
+        return product.customAddOns || ALL_ADDONS;
+      }
+
+      function calculateItemTotal(product, selectedIndex, addonIds, quantity) {
+        const base = product.options[selectedIndex]?.price || 0;
+        const pool = getAddonsPool(product);
+
+        const extrasPrice = addonIds.reduce((sum, id) => {
+          if (product.includesLed && id === "led") return sum;
+          const match = pool.find(a => a.id === id);
+          return sum + (match ? match.price : 0);
+        }, 0);
+
+        return (base + extrasPrice) * (quantity || 1);
+      }
+
+
+      // ----------------------------------------------------
+      // SHOPPING CORE LOGIC
+      // ----------------------------------------------------
+      function addItemToCart(productId) {
+        const product = PRODUCTS.find(p => p.id === productId);
+        if (!product) return;
+
+        const config = productSelections[productId];
+        const option = product.options[config.selectedIndex];
+        if (!option) return;
+
+        const pool = getAddonsPool(product);
+        const selectedAddOnObjs = pool.filter(a => config.addOns.includes(a.id));
+        const unitCost = calculateItemTotal(product, config.selectedIndex, config.addOns, 1);
+
+        // Deduplicate
+        const matchIndex = cart.findIndex(item => {
+          if (item.id !== product.id || item.optionLabel !== option.label) return false;
+          if (item.selectedAddOns.length !== selectedAddOnObjs.length) return false;
+          const idsA = item.selectedAddOns.map(x => x.id).sort();
+          const idsB = selectedAddOnObjs.map(x => x.id).sort();
+          return idsA.every((v, i) => v === idsB[i]);
+        });
+
+        if (matchIndex > -1) {
+          cart[matchIndex].quantity += config.quantity;
+        } else {
+          cart.push({
+            id: product.id,
+            name: product.name,
+            image: option.image || product.image,
+            optionLabel: option.label,
+            selectedAddOns: selectedAddOnObjs,
+            quantity: config.quantity,
+            total: unitCost
+          });
+        }
+
+        // Cache cart
+        localStorage.setItem("cadaPetalaCart", JSON.stringify(cart));
+
+        // Toast feedback notifying about floating basket with high visibility
+        showToastNotification(`Presente reservado na Cesta! 🌸 Toque no ícone no topo direito para concluir.`);
+
+        // Quick visual checkmark update
+        config.added = true;
+        renderCatalog();
+        setTimeout(() => {
+          config.added = false;
+          renderCatalog();
+        }, 2200);
+
+        // Synchronize state
+        syncBagIndicatorUI();
+
+        // High conversion animation flash & scale attention on the floating basket
+        const floatCart = document.getElementById("floating-cart-btn");
+        if (floatCart) {
+          floatCart.classList.add("scale-110", "rotate-6");
+          // Add extra animation class
+          floatCart.style.transition = "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+          setTimeout(() => {
+            floatCart.classList.remove("scale-110", "rotate-6");
+          }, 800);
+        }
+      }
+
+      function removeItemFromCart(index) {
+        cart.splice(index, 1);
+        localStorage.setItem("cadaPetalaCart", JSON.stringify(cart));
+        syncBagIndicatorUI();
+        renderCartDrawerList();
+      }
+
+      function updateItemQuantity(index, delta) {
+        cart[index].quantity += delta;
+        if (cart[index].quantity < 1) {
+          cart.splice(index, 1);
+        }
+        localStorage.setItem("cadaPetalaCart", JSON.stringify(cart));
+        syncBagIndicatorUI();
+        renderCartDrawerList();
+      }
+
+      function getCartTotal() {
+        return cart.reduce((sum, item) => sum + item.total * item.quantity, 0);
+      }
+
+
+      // ----------------------------------------------------
+      // SHIPPING ZIP API CALLERS
+      // ----------------------------------------------------
+      let globalLoadingCep = false;
+
+      async function requestShippingCEP(cepValue, isBagView = false) {
+        if (!cepValue) {
+          return { error: "Escreva o CEP." };
+        }
+        const clean = cepValue.replace(/\D/g, "");
+        if (clean.length !== 8) {
+          return { error: "Digite 8 dígitos." };
+        }
+
+        globalLoadingCep = true;
+        if (isBagView) {
+          document.getElementById("bag-cep-btn-txt").textContent = "...";
+        }
+
+        try {
+          const r = await fetch(`https://viacep.com.br/ws/${clean}/json/`);
+          const data = await r.json();
+          globalLoadingCep = false;
+
+          if (data.erro) {
+            cartCity = ""; cartUf = ""; cartStreet = ""; cartBairro = "";
+            localStorage.removeItem("cartCep");
+            localStorage.removeItem("cartCity");
+            localStorage.removeItem("cartUf");
+            localStorage.removeItem("cartStreet");
+            localStorage.removeItem("cartBairro");
+            return { error: "CEP não localizado." };
+          } else {
+            cartCep = cepValue;
+            cartCity = data.localidade || "";
+            cartUf = data.uf || "";
+            cartStreet = data.logradouro || "";
+            cartBairro = data.bairro || "";
+
+            localStorage.setItem("cartCep", cartCep);
+            localStorage.setItem("cartCity", cartCity);
+            localStorage.setItem("cartUf", cartUf);
+            localStorage.setItem("cartStreet", cartStreet);
+            localStorage.setItem("cartBairro", cartBairro);
+
+            // Sync other side fields
+            syncCepFieldValues();
+
+            return { success: true };
+          }
+        } catch (err) {
+          globalLoadingCep = false;
+          return { error: "Falha ao consultar local." };
+        }
+      }
+
+      // Catalog panel Zip action handler
+      async function handleLocalCardShipping(productId) {
+        const parent = document.getElementById(`product-${productId}`);
+        if (!parent) return;
+
+        const input = parent.querySelector("input[type=text]");
+        const val = input ? input.value : "";
+        
+        const loaderBtn = parent.querySelector(".verify-cep-btn");
+        if (loaderBtn) loaderBtn.innerHTML = "<span>Consultando...</span>";
+
+        const res = await requestShippingCEP(val, false);
+        
+        // Re-render catalog to display the computed localized notice rows
+        renderCatalog();
+      }
+
+      async function calculateShippingInBag() {
+        const inp = document.getElementById("cart-drawer-cep-input");
+        const val = inp ? inp.value : "";
+        const errorEl = document.getElementById("bag-cep-error");
+        
+        const res = await requestShippingCEP(val, true);
+        document.getElementById("bag-cep-btn-txt").textContent = "OK";
+
+        if (res.error) {
+          errorEl.textContent = res.error;
+          errorEl.classList.remove("hidden");
+          document.getElementById("bag-cep-success-card").classList.add("hidden");
+        } else {
+          errorEl.classList.add("hidden");
+        }
+        renderCartDrawerList();
+      }
+
+
+      // ----------------------------------------------------
+      // TOAST CONTROLS
+      // ----------------------------------------------------
+      let toastTimer = null;
+      function showToastNotification(text) {
+        const container = document.getElementById("toast-container");
+        const msg = document.getElementById("toast-message");
+        if (!container || !msg) return;
+
+        msg.textContent = text;
+        container.classList.remove("hidden");
+
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          container.classList.add("hidden");
+        }, 5000);
+      }
+
+
+      // ----------------------------------------------------
+      // WHATSAPP RESERVATION ENGINES
+      // ----------------------------------------------------
+      function checkoutToWhatsApp() {
+        if (cart.length === 0) return;
+
+        let orderText = `*✨ INTENÇÃO DE PEDIDO - A CADA PÉTALA ✨*\n`;
+        orderText += `----------------------------------------\n\n`;
+        orderText += `Olá! Encaminho abaixo a lista de mimos artesanais que gostaria de encomendar com o Ateliê:\n\n`;
+        orderText += `*🛍️ CESTA DE PRESENTES:*\n`;
+        orderText += `----------------------------------------\n`;
+
+        cart.forEach((item, index) => {
+          orderText += `*MIMO #${index + 1}: ${item.name}*\n`;
+          orderText += `  • *Opção selecionada:* ${item.optionLabel}\n`;
+          if (item.selectedAddOns.length > 0) {
+            orderText += `  • *Adicionais / Extras:*\n`;
+            item.selectedAddOns.forEach(addon => {
+              orderText += `    ➕ ${addon.name} (+ R$ ${addon.price.toFixed(2).replace(".", ",")})\n`;
+            });
+          } else {
+            orderText += `  • *Adicionais / Extras:* Nenhum extra\n`;
+          }
+          orderText += `  • *Quantidade:* ${item.quantity} ${item.quantity === 1 ? 'unidade' : 'unidades'}\n`;
+          orderText += `  • *Subtotal deste item:* R$ ${(item.total * item.quantity).toFixed(2).replace(".", ",")}\n\n`;
+        });
+
+        const val = getCartTotal();
+        orderText += `----------------------------------------\n`;
+        orderText += `*💰 RESUMO FINANCEIRO:*\n`;
+        orderText += `----------------------------------------\n`;
+        orderText += `• *Subtotal Estimado dos Produtos:* R$ ${val.toFixed(2).replace(".", ",")}\n`;
+        orderText += `• *Taxa de Envio:* A combinar no WhatsApp\n\n`;
+
+        if (cartCep || cartCity) {
+          orderText += `----------------------------------------\n`;
+          orderText += `*📍 DETALHES DE ENVIO:*\n`;
+          orderText += `----------------------------------------\n`;
+          if (cartCep) {
+            orderText += `• *CEP de Destino:* ${cartCep}\n`;
+          }
+          if (cartCity) {
+            const local = cartCity.toLowerCase().includes("epitácio") || cartCity.toLowerCase().includes("epitacio");
+            orderText += `• *Cidade/Destino:* ${cartStreet ? `${cartStreet}, ` : ""}${cartBairro ? `${cartBairro}, ` : ""}${cartCity}/${cartUf}\n`;
+            orderText += `• *Frete:* ${local ? "Retirada/entrega local em Presidente Epitácio-SP (Sem frete)" : "A combinar via Correios"}\n`;
+          }
+          orderText += `\n`;
+        }
+
+        orderText += `----------------------------------------\n`;
+        orderText += `Gostaria de falar com o Ateliê para combinarmos os detalhes (cores das flores de cetim, laços, embalagem e frase do bilhete)! Muito obrigado(a)! 💐`;
+
+        window.open(`https://wa.me/5516993161762?text=${encodeURIComponent(orderText)}`, "_blank");
+      }
+
+      function sendWhatsAppDirectBuy(productId) {
+        const product = PRODUCTS.find(p => p.id === productId);
+        if (!product) return;
+
+        if (productId === "custom-buque") {
+          const message = `*🎨 SOLICITAÇÃO DE ORÇAMENTO PERSONALIZADO*\n` +
+                          `----------------------------------------\n\n` +
+                          `Olá! Fiquei muito interessado(a) na opção "Monte o seu Buquê" no site e gostaria de conversar com o Ateliê para criarmos um modelo exclusivo e solicitar um orçamento personalizado! 💐`;
+          window.open(`https://wa.me/5516993161762?text=${encodeURIComponent(message)}`, "_blank");
+          return;
+        }
+
+        const config = productSelections[productId];
+        const option = product.options[config.selectedIndex];
+        if (!option) return;
+
+        const total = calculateItemTotal(product, config.selectedIndex, config.addOns, config.quantity);
+        const pool = getAddonsPool(product);
+        const list = pool.filter(a => config.addOns.includes(a.id));
+
+        let txt = `*✨ INTENÇÃO DE RESERVA DIRETA - A CADA PÉTALA ✨*\n`;
+        txt += `----------------------------------------\n\n`;
+        txt += `Olá! Gostaria de encomendar este mimo artesanal diretamente pelo site:\n\n`;
+        txt += `*🎁 MIMO SOLICITADO:*\n`;
+        txt += `----------------------------------------\n`;
+        txt += `• *Produto:* ${product.name}\n`;
+        txt += `• *Opção selecionada:* ${option.label} (Base: R$ ${option.price.toFixed(2).replace(".", ",")})\n`;
+        
+        if (list.length > 0) {
+          txt += `• *Adicionais / Extras:*\n`;
+          list.forEach(addon => {
+            txt += `  ➕ ${addon.name} (+ R$ ${addon.price.toFixed(2).replace(".", ",")})\n`;
+          });
+        } else {
+          txt += `• *Adicionais / Extras:* Nenhum extra\n`;
+        }
+        
+        txt += `• *Quantidade:* ${config.quantity}x\n`;
+        txt += `• *Valor Estimado do Mimo:* R$ ${total.toFixed(2).replace(".", ",")}\n\n`;
+
+        txt += `----------------------------------------\n`;
+        txt += `*💰 RESUMO FINANCEIRO:*\n`;
+        txt += `----------------------------------------\n`;
+        txt += `• *Total Estimado dos Produtos:* R$ ${total.toFixed(2).replace(".", ",")}\n`;
+        txt += `• *Taxa de Envio:* A combinar no WhatsApp\n\n`;
+
+        if (cartCep || cartCity) {
+          txt += `----------------------------------------\n`;
+          txt += `*📍 DETALHES DE ENVIO:*\n`;
+          txt += `----------------------------------------\n`;
+          if (cartCep) {
+            txt += `• *CEP de Destino:* ${cartCep}\n`;
+          }
+          if (cartCity) {
+            const local = cartCity.toLowerCase().includes("epitácio") || cartCity.toLowerCase().includes("epitacio");
+            txt += `• *Cidade/Destino:* ${cartStreet ? `${cartStreet}, ` : ""}${cartBairro ? `${cartBairro}, ` : ""}${cartCity}/${cartUf}\n`;
+            txt += `• *Frete:* ${local ? "Retirada/entrega local em Presidente Epitácio-SP (Sem frete)" : "A combinar via Correios"}\n`;
+          }
+          txt += `\n`;
+        }
+
+        txt += `----------------------------------------\n`;
+        txt += `Gostaria de ajustar com o Ateliê sobre os tons de cetim para as flores e finalizar a compra! Muito obrigado(a)! ✨`;
+
+        window.open(`https://wa.me/5516993161762?text=${encodeURIComponent(txt)}`, "_blank");
+      }
+
+
+      // ----------------------------------------------------
+      // GENERAL RENDER CONTROLLER
+      // ----------------------------------------------------
+      function renderAllStaticElements() {
+        // Hero stars (5)
+        const hs = document.getElementById("hero-stars");
+        if (hs) {
+          hs.innerHTML = Array(5).fill('<i data-lucide="star" class="w-3.5 h-3.5 fill-current text-brand-gold"></i>').join("");
+        }
+
+        // Proof stars (5)
+        const ps = document.getElementById("proof-stars-1");
+        if (ps) {
+          ps.innerHTML = Array(5).fill('<i data-lucide="star" class="w-4 h-4 fill-current text-brand-gold"></i>').join("");
+        }
+
+        // Benefits grid loop
+        const grid = document.getElementById("benefits-grid");
+        if (grid) {
+          grid.innerHTML = BENEFITS.map(benefit => `
+            <div class="text-center md:text-left space-y-3.5 px-2">
+              <div class="w-12 h-12 rounded-xl bg-brand-rose/20 flex items-center justify-center text-brand-gold mx-auto md:mx-0 shadow-sm">
+                <i data-lucide="${benefit.icon}" class="w-5 h-5 text-brand-ink"></i>
+              </div>
+              <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-brand-ink font-sans">${benefit.title}</h4>
+                <p class="text-[10px] md:text-[11px] text-brand-ink/65 leading-relaxed mt-1.5 font-sans">${benefit.desc}</p>
+              </div>
+            </div>
+          `).join("");
+        }
+
+        // Occasions grid loop
+        const occ = document.getElementById("occasions-grid");
+        if (occ) {
+          occ.innerHTML = OCCASIONS.map(oc => `
+            <div class="bg-white p-8 rounded-[2.2rem] border border-brand-rose/20 shadow-sm hover:shadow-xl hover:border-brand-gold/25 transition-all duration-300 flex flex-col justify-between">
+              <div class="space-y-4 font-sans">
+                <div class="w-10 h-10 rounded-full bg-brand-rose/25 flex items-center justify-center text-lg">
+                  ${oc.icon === 'butterfly-placeholder' ? '🦋' : oc.icon}
+                </div>
+                <h3 class="text-base font-serif font-bold text-brand-ink">${oc.title}</h3>
+                <p class="text-xs text-brand-ink/65 leading-relaxed font-light">${oc.desc}</p>
+              </div>
+              <button onclick="selectProduct('', '${oc.category}')" class="text-[9.5px] font-bold text-[#B5945B] hover:text-brand-ink uppercase tracking-widest pt-4 block border-t border-brand-ink/5 mt-4 text-left cursor-pointer font-sans w-full">
+                ${oc.actionText}
+              </button>
+            </div>
+          `).join("");
+        }
+
+        // Faq Accordion Cards list
+        const faqBox = document.getElementById("faq-accordions-container");
+        if (faqBox) {
+          faqBox.innerHTML = FAQ_ITEMS.map((faq, idx) => {
+            const isActive = activeFaq === idx;
+            return `
+              <div class="border border-brand-ink/5 rounded-2xl overflow-hidden bg-white shadow-sm font-sans">
+                <button onclick="toggleFaqAccordion(${idx})" class="w-full px-7 py-5 text-left flex justify-between items-center hover:bg-[#FCFAF7] transition-colors cursor-pointer">
+                  <span class="text-xs md:text-sm font-bold text-brand-ink">${faq.q}</span>
+                  <i data-lucide="chevron-down" class="w-4 h-4 text-brand-gold transition-transform duration-300 ${isActive ? 'rotate-180' : ''}"></i>
+                </button>
+                <div class="faq-accordion-body relative ${isActive ? '' : 'hidden'} px-7 pb-6 text-[11px] md:text-xs text-brand-ink/65 leading-relaxed font-light border-t border-brand-ink/5 pt-4 animate-fade-in font-sans">
+                  ${faq.a}
+                </div>
+              </div>
+            `;
+          }).join("");
+        }
+      }
+
+      function toggleFaqAccordion(idx) {
+        activeFaq = (activeFaq === idx) ? null : idx;
+        renderAllStaticElements();
+        lucide.createIcons();
+      }
+
+      // ----------------------------------------------------
+      // DIAL RECOMMENDATIONS FAVORITES TABS
+      // ----------------------------------------------------
+      function renderCurationThemes() {
+        const wrap = document.getElementById("curation-theme-tags");
+        if (!wrap) return;
+
+        wrap.innerHTML = shuffledThemes.map((theme, index) => {
+          const isActive = activeThemeIdx === index;
+          return `
+            <button onclick="setActiveThemeIndex(${index})" class="px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all duration-300 border cursor-pointer ${
+              isActive ? 'bg-brand-ink text-brand-cream border-brand-ink' : 'bg-white hover:bg-brand-soft text-brand-ink/60 border-brand-ink/5'
+            }">
+              <span>${theme.label}</span>
+            </button>
+          `;
+        }).join("");
+      }
+
+      function setActiveThemeIndex(index) {
+        activeThemeIdx = index;
+        renderCurationThemes();
+        renderFavorites();
+        lucide.createIcons();
+      }
+
+      function renderFavorites() {
+        const emotionalEl = document.getElementById("curation-emotional-text");
+        const favorsBox = document.getElementById("curation-favorites-grid");
+        if (!favorsBox) return;
+
+        const currentTheme = shuffledThemes[activeThemeIdx] || { text: "Emocionar e Surpreender ✨" };
+        if (emotionalEl) {
+          emotionalEl.textContent = currentTheme.text;
+        }
+
+        const poolKeys = currentTheme.pool || [];
+        const favorList = poolKeys.map(k => FAVORITES_POOL[k]).filter(Boolean);
+
+        favorsBox.innerHTML = favorList.map(fav => `
+          <div class="bg-white rounded-[2.5rem] border border-brand-ink/5 p-6 flex flex-col justify-between hover:shadow-xl hover:border-brand-gold/10 transition-all duration-500 animate-fade-in">
+            <div class="space-y-5 text-left">
+              <div class="aspect-[4/5] rounded-[2rem] overflow-hidden bg-brand-soft relative">
+                <img src="${fav.image}" alt="${fav.name}" class="w-full h-full object-cover" />
+                ${fav.badge ? `
+                  <div class="absolute top-4 left-4 flex items-center gap-1.5 bg-[#FAF9F5]/95 backdrop-blur-md px-3 py-1.5 rounded-full shadow-sm border border-brand-rose/10 text-[#A67C37]">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#A67C37]"></i>
+                    <span class="text-[9px] font-bold uppercase tracking-wider text-[#A67C37]">${fav.badge}</span>
+                  </div>
+                ` : ''}
+              </div>
+
+              <div class="space-y-3 font-sans">
+                <div class="flex justify-between items-center flex-wrap gap-2">
+                  <span class="bg-brand-gold/10 text-brand-gold text-[8px] font-bold px-2 py-0.5 rounded uppercase tracking-wide">
+                    ${fav.category}
+                  </span>
+                  <p class="text-[10px] text-brand-ink/40 font-bold">
+                    a partir de R$ ${fav.price.toFixed(2).replace(".", ",")}
+                  </p>
+                </div>
+                <div>
+                  <h3 class="text-xl font-serif text-brand-ink font-bold leading-tight">${fav.name}</h3>
+                  <p class="text-brand-ink/65 text-xs font-light leading-relaxed mt-1">${fav.description}</p>
+                </div>
+
+                <div class="pt-3 border-t border-brand-ink/5 space-y-2.5">
+                  <p class="text-brand-ink/80 italic font-serif text-[12px] leading-relaxed relative pl-4">
+                    <span class="absolute left-0 top-0 text-brand-gold text-sm font-serif">“</span>
+                    ${fav.emotionalText}
+                  </p>
+                  ${fav.urgencyText ? `
+                    <div class="flex items-center justify-between">
+                      <span class="inline-flex items-center gap-1 bg-amber-50 text-[#8C6D31] text-[9px] font-semibold px-2.5 py-1 rounded-full border border-amber-100/50">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#B5945B] animate-pulse"></span>
+                        ${fav.urgencyText}
+                      </span>
+                    </div>
+                  ` : ''}
+                </div>
+              </div>
+            </div>
+
+            <button onclick="selectProduct('${fav.id}', '${fav.category}')" class="w-full mt-6 py-3.5 bg-brand-soft hover:bg-brand-ink hover:text-white transition-colors duration-300 rounded-xl text-[10px] font-black uppercase tracking-widest text-brand-ink text-center cursor-pointer flex items-center justify-center gap-1.5 font-sans">
+              <span>Ver Detalhes e Pedir</span>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-current fill-current"></i>
+            </button>
+          </div>
+        `).join("");
+      }
+
+
+      // ----------------------------------------------------
+      // DIAL PRODUCT CATALOG GRIDS
+      // ----------------------------------------------------
+      function renderCategoriesNavigator() {
+        const tabsBox = document.getElementById("categories-tabs");
+        if (!tabsBox) return;
+
+        tabsBox.innerHTML = CATEGORIES.map(cat => {
+          const isActive = activeCategory === cat;
+          return `
+            <button onclick="setCatalogActiveCategory('${cat}')" class="text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 pb-2 relative whitespace-nowrap cursor-pointer ${
+              isActive ? 'text-brand-ink translate-y-0.5' : 'text-brand-ink/30 hover:text-brand-ink/60'
+            }">
+              <span>${cat}</span>
+              ${isActive ? '<div class="absolute -bottom-1 left-0 w-full h-0.5 bg-brand-gold transition-all"></div>' : ''}
+            </button>
+          `;
+        }).join("");
+      }
+
+      function setCatalogActiveCategory(cat) {
+        activeCategory = cat;
+        renderCategoriesNavigator();
+        renderCatalog();
+        lucide.createIcons();
+      }
+
+      function setProductSelectionValue(productId, key, value) {
+        if (!productSelections[productId]) return;
+        productSelections[productId][key] = value;
+        renderCatalog();
+        lucide.createIcons();
+      }
+
+      function toggleProductAddonCheckbox(productId, addonId) {
+        const config = productSelections[productId];
+        if (!config) return;
+
+        const index = config.addOns.indexOf(addonId);
+        if (index > -1) {
+          config.addOns.splice(index, 1);
+        } else {
+          config.addOns.push(addonId);
+        }
+        renderCatalog();
+        lucide.createIcons();
+      }
+
+      function renderCatalog() {
+        const grid = document.getElementById("catalog-products-grid");
+        if (!grid) return;
+
+        const list = PRODUCTS.filter(p => p.category === activeCategory);
+
+        grid.innerHTML = list.map(product => {
+          const config = productSelections[product.id] || {
+            selectedIndex: 0, addOns: [], quantity: 1, added: false, addonsOpen: false
+          };
+
+          const currentOption = product.options[config.selectedIndex] || product.options[0];
+          const calculatedTotalValue = calculateItemTotal(product, config.selectedIndex, config.addOns, config.quantity);
+
+          let optionSelectHTML = "";
+          let addonsHTML = "";
+          let freightHTML = "";
+
+          if (product.id !== "custom-buque") {
+            // Dropdown option sizes
+            optionSelectHTML = `
+              <div class="grid grid-cols-12 gap-4 font-sans text-left">
+                <div class="col-span-8 space-y-2">
+                  <label class="text-[9px] font-bold uppercase tracking-[0.15em] text-brand-gold block">
+                    ${product.id === 'caneta' || product.id === 'unit-fl' ? 'Tipo de Flor:' : 'Escolha o Tamanho:'}
+                  </label>
+                  <div class="relative group">
+                    <select onchange="setProductSelectionValue('${product.id}', 'selectedIndex', parseInt(this.value))" class="w-full bg-transparent border-b border-brand-ink/10 py-3 text-xs focus:outline-none focus:border-brand-gold appearance-none cursor-pointer font-semibold transition-all group-hover:border-brand-gold/40 text-brand-ink">
+                      ${product.options.map((opt, oIdx) => `
+                        <option value="${oIdx}" ${config.selectedIndex === oIdx ? 'selected' : ''}>
+                          ${opt.label} — R$ ${opt.price.toFixed(2).replace(".", ",")}
+                        </option>
+                      `).join("")}
+                    </select>
+                    <div class="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none opacity-40 group-hover:opacity-100 transition-opacity">
+                      <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-brand-gold"></i>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Quantity input -->
+                <div class="col-span-4 space-y-2">
+                  <label class="text-[9px] font-bold uppercase tracking-[0.15em] text-brand-gold block">Qtd:</label>
+                  <input type="number" min="1" value="${config.quantity}" onchange="setProductSelectionValue('${product.id}', 'quantity', Math.max(1, parseInt(this.value) || 1))" class="w-full bg-transparent border-b border-brand-ink/10 py-2.5 text-xs focus:outline-none focus:border-brand-gold font-bold text-brand-ink text-left" />
+                </div>
+              </div>
+            `;
+
+            // Expandable Add-ons Checkboxes
+            if (product.category !== "Chaveiros") {
+              const addonsPool = getAddonsPool(product);
+              addonsHTML = `
+                <div class="space-y-3 font-sans">
+                  <button type="button" onclick="setProductSelectionValue('${product.id}', 'addonsOpen', ${!config.addonsOpen})" class="text-[10px] font-bold uppercase tracking-[0.1em] text-brand-gold hover:opacity-75 transition-opacity flex items-center gap-1 cursor-pointer">
+                    <span>${config.addonsOpen ? "- Ocultar Extras" : "+ Personalizar com Diferenciais ✨"}</span>
+                  </button>
+
+                  ${config.addonsOpen ? `
+                    <div class="grid grid-cols-1 gap-1.5 pt-2 border-t border-brand-ink/5 animate-fade-in bg-[#FCFAF7]/50 rounded-xl p-2.5 text-left">
+                      ${addonsPool.map(addon => {
+                        const isLedDisabled = product.includesLed && addon.id === "led";
+                        const isChecked = isLedDisabled || config.addOns.includes(addon.id);
+                        return `
+                          <label class="flex items-center justify-between py-1.5 cursor-pointer group hover:bg-[#FAF9F5] rounded-lg px-2 transition-colors ${isLedDisabled ? 'opacity-30 pointer-events-none' : ''}">
+                            <div class="flex items-center gap-2">
+                              <input type="checkbox" ${isChecked ? 'checked' : ''} onclick="toggleProductAddonCheckbox('${product.id}', '${addon.id}')" ${isLedDisabled ? 'disabled' : ''} class="w-3.5 h-3.5 rounded accent-brand-gold border-brand-ink/10 text-brand-gold" />
+                              <span class="text-xs text-brand-ink/65 font-medium">${addon.name}</span>
+                            </div>
+                            <span class="text-[9.5px] font-bold text-brand-gold">
+                              ${isLedDisabled ? 'Incluso' : `+ R$ ${addon.price.toFixed(2).replace(".", ",")}`}
+                            </span>
+                          </label>
+                        `;
+                      }).join("")}
+                    </div>
+                  ` : ""}
+                </div>
+              `;
+            }
+
+            // Freight checker card
+            freightHTML = `
+              <div class="border border-brand-ink/5 bg-[#FAF9F5] rounded-2xl p-4 space-y-3 font-sans text-left">
+                <div class="space-y-1">
+                  <div class="flex items-center gap-2">
+                    <i data-lucide="truck" class="w-4 h-4 text-brand-gold"></i>
+                    <span class="text-[9px] font-bold uppercase tracking-widest text-[#B5945B]">Verificar Entrega</span>
+                  </div>
+                  <p class="text-[10px] text-brand-ink/75 leading-relaxed">
+                    Mora em <strong class="text-brand-ink font-semibold">Presidente Epitácio-SP</strong>? A retirada é grátis!
+                    <span class="block mt-1 font-semibold text-brand-gold">
+                      Se mora em outra cidade, digite seu CEP abaixo para o envio seguro pelos Correios:
+                    </span>
+                  </p>
+                </div>
+
+                <div class="flex gap-2">
+                  <input type="text" placeholder="Seu CEP (00000-000)" maxlength="9" value="${cartCep}" onchange="cartCep = this.value" onkeydown="if(event.key === 'Enter') handleLocalCardShipping('${product.id}')" class="w-full bg-white border border-brand-ink/10 rounded-xl px-2.5 py-1.5 text-xs text-brand-ink focus:outline-none" />
+                  <button type="button" onclick="handleLocalCardShipping('${product.id}')" class="verify-cep-btn bg-brand-ink text-brand-cream px-3 py-1.5 rounded-xl text-[10px] font-bold tracking-wider hover:bg-brand-gold transition-colors flex items-center gap-1 cursor-pointer">
+                    <i data-lucide="map-pin" class="w-3.5 h-3.5 text-brand-cream"></i>
+                    <span>Verificar</span>
+                  </button>
+                </div>
+
+                <div class="text-[9px] text-[#C27D38] leading-tight bg-[#FAF4ED] border border-[#ECD9C5]/50 px-2.5 py-2 rounded-lg font-sans">
+                  📦 <strong>Envio pelos Correios:</strong> Para outras cidades, o valor do frete é combinado e acertado de forma super simples pelo WhatsApp após o pedido.
+                </div>
+
+                ${cartCity ? `
+                  <div class="pt-0.5 animate-fade-in">
+                    ${(cartCity.toLowerCase().includes("epitácio") || cartCity.toLowerCase().includes("epitacio")) ? `
+                      <div class="bg-green-50 border border-green-200/50 p-2 rounded-xl text-green-700 text-[10px] font-semibold leading-relaxed">
+                        📍 Presidente Epitácio-SP: Retirada de luxo no ateliê ou frete local combinado!
+                      </div>
+                    ` : `
+                      <div class="bg-brand-gold/5 border border-brand-gold/15 p-2 rounded-xl text-brand-gold text-[10px] font-semibold leading-relaxed">
+                        📍 Envio para <span>${cartCity}/${cartUf}</span>: Frete a combinar no chat após o pedido!
+                      </div>
+                    `}
+                  </div>
+                ` : ""}
+              </div>
+            `;
+          } else {
+            // Monte o Seu specialized layout description
+            optionSelectHTML = `
+              <div class="py-2 space-y-4 font-sans text-left">
+                <p class="text-xs text-brand-ink/60 leading-relaxed font-light italic">
+                  Crie a paleta do seu jeito. Modifique a base, fitas de cetim e adicione borboletas 3D e fotos. Após clicar, desenhamos o modelo com você.
+                </p>
+                <div class="flex items-center gap-2 text-brand-gold">
+                  <i data-lucide="sparkles" class="w-4 h-4 text-brand-gold"></i>
+                  <span class="text-[9px] font-bold uppercase tracking-widest">Co-Criação com o Ateliê</span>
+                </div>
+              </div>
+            `;
+          }
+
+          return `
+            <div id="product-${product.id}" class="product-card space-y-6 scroll-mt-28 transition-all duration-700">
+              <!-- Imagery block -->
+              <div class="aspect-[4/5] bg-brand-soft rounded-[2.5rem] overflow-hidden relative shadow-sm border border-brand-ink/5">
+                <img src="${currentOption?.image || product.image}" alt="${product.name}" class="w-full h-full object-cover transition-transform duration-700" loading="lazy" />
+                ${product.badge ? `
+                  <div class="absolute top-6 left-6 flex items-center gap-1.5 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full shadow-sm border border-brand-rose/20 text-[#A67C37]">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#A67C37]"></i>
+                    <span class="text-[9px] font-bold uppercase tracking-wider text-[#A67C37]">${product.badge}</span>
+                  </div>
+                ` : ""}
+              </div>
+
+              <!-- Product Details and selects -->
+              <div class="space-y-6 px-2 text-left">
+                <div class="space-y-2">
+                  <h3 class="text-2xl font-serif text-brand-ink font-bold leading-tight">${product.name}</h3>
+                  ${product.id !== "custom-buque" ? `
+                    <p class="text-xs text-brand-gold font-bold uppercase tracking-wider font-sans">
+                      A partir de R$ ${product.options[0].price.toFixed(2).replace(".", ",")}
+                    </p>
+                  ` : ""}
+                </div>
+
+                <div class="space-y-4">
+                  ${optionSelectHTML}
+                  ${addonsHTML}
+                </div>
+
+                ${freightHTML}
+
+                <!-- Buy Actions layout -->
+                <div class="flex items-center justify-between gap-4 pt-1 font-sans">
+                  ${product.id !== "custom-buque" ? `
+                    <div class="space-y-0.5 shrink-0">
+                      <p class="text-[9px] uppercase font-bold tracking-widest text-[#B5945B]">Valor do Carinho</p>
+                      <p class="text-xl font-serif text-brand-ink font-bold">
+                        R$ ${calculatedTotalValue.toFixed(2).replace(".", ",")}
+                      </p>
+                    </div>
+                  ` : ""}
+
+                  <button onclick="executeProductActionBuy('${product.id}')" class="w-full text-center bg-brand-ink text-brand-cream px-5 py-4 rounded-xl text-xs font-bold uppercase tracking-wide flex items-center justify-center gap-2 transition-all duration-300 shadow-xl shadow-brand-ink/10 cursor-pointer ${
+                    product.id === 'custom-buque' ? 'bg-brand-gold text-brand-ink font-semibold' : config.added ? 'bg-green-600 text-white' : ''
+                  }">
+                    <i data-lucide="${product.id === 'custom-buque' ? 'sparkles' : 'shopping-bag'}" class="w-4 h-4 text-current"></i>
+                    <span>
+                      ${product.id === 'custom-buque' ? 'Personalizar Presente 💌' : config.added ? 'Garantido na Cesta! ✨' : 'Comprar com Carinho 💝'}
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join("");
+
+        // Refresh icons
+        lucide.createIcons();
+      }
+
+      function executeProductActionBuy(productId) {
+        if (productId === "custom-buque") {
+          sendWhatsAppDirectBuy(productId);
+        } else {
+          addItemToCart(productId);
+        }
+      }
+
+
+      // ----------------------------------------------------
+      // CART DRAWING PANEL SLIDERS
+      // ----------------------------------------------------
+      function openCartDrawer() {
+        cartOpen = true;
+        const wrapper = document.getElementById("cart-drawer-wrapper");
+        const panel = document.getElementById("cart-drawer-panel");
+        if (!wrapper || !panel) return;
+
+        wrapper.classList.remove("hidden");
+        setTimeout(() => {
+          panel.classList.remove("translate-x-full");
+        }, 30);
+
+        renderCartDrawerList();
+        lucide.createIcons();
+      }
+
+      function closeCartDrawer() {
+        cartOpen = false;
+        const wrapper = document.getElementById("cart-drawer-wrapper");
+        const panel = document.getElementById("cart-drawer-panel");
+        if (!wrapper || !panel) return;
+
+        panel.classList.add("translate-x-full");
+        setTimeout(() => {
+          wrapper.classList.add("hidden");
+        }, 350);
+      }
+
+      function syncBagIndicatorUI() {
+        const floatCart = document.getElementById("floating-cart-btn");
+        const floatBadge = document.getElementById("floating-cart-badge");
+
+        const count = cart.reduce((acc, item) => acc + item.quantity, 0);
+
+        if (count > 0) {
+          if (floatCart) {
+            floatCart.classList.remove("hidden");
+            floatCart.classList.add("flex");
+          }
+          if (floatBadge) floatBadge.textContent = count;
+        } else {
+          if (floatCart) {
+            floatCart.classList.add("hidden");
+            floatCart.classList.remove("flex");
+          }
+        }
+      }
+
+      function renderCartDrawerList() {
+        const itemsContainer = document.getElementById("cart-drawer-items");
+        const checkoutCard = document.getElementById("cart-drawer-checkout-card");
+        const itemDesc = document.getElementById("cart-drawer-item-desc");
+
+        const itemsCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+
+        if (itemDesc) {
+          itemDesc.textContent = `${itemsCount} ${itemsCount === 1 ? 'presente pronto' : 'presentes prontos'}`;
+        }
+
+        if (cart.length === 0) {
+          if (checkoutCard) checkoutCard.classList.add("hidden");
+          if (itemsContainer) {
+            itemsContainer.innerHTML = `
+              <div class="h-full flex flex-col items-center justify-center text-center space-y-5 opacity-40 py-16 text-brand-ink">
+                <i data-lucide="shopping-bag" class="w-12 h-12 stroke-[1.25]"></i>
+                <p class="text-xs font-semibold font-sans">Sua cesta está sem mimos no momento.</p>
+                <button onclick="closeCartDrawer(); scrollToCatalog();" class="text-[10px] font-bold uppercase tracking-widest border-b border-brand-ink pb-0.5 font-sans cursor-pointer">
+                  Explorar Coleções
+                </button>
+              </div>
+            `;
+          }
+          return;
+        }
+
+        // Show checkout details
+        if (checkoutCard) checkoutCard.classList.remove("hidden");
+
+        // Loop items list HTML
+        if (itemsContainer) {
+          itemsContainer.innerHTML = cart.map((item, index) => `
+            <div class="flex gap-4 border-b border-brand-ink/5 pb-6">
+              <div class="w-16 h-20 bg-brand-soft rounded-xl overflow-hidden shadow-sm flex-shrink-0">
+                <img src="${item.image}" class="w-full h-full object-cover" alt="${item.name}" />
+              </div>
+              <div class="flex-1 space-y-1.5 text-left font-sans">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <h4 class="text-xs font-bold text-brand-ink leading-tight">${item.name}</h4>
+                    <p class="text-[10px] text-brand-ink/40 font-bold mt-0.5">${item.optionLabel}</p>
+                  </div>
+                  <button onclick="removeItemFromCart(${index})" class="text-brand-ink/25 hover:text-red-500 transition-colors cursor-pointer">
+                    <i data-lucide="x" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+
+                ${item.selectedAddOns.length > 0 ? `
+                  <div class="flex flex-wrap gap-1">
+                    ${item.selectedAddOns.map(addon => `
+                      <span class="px-1.5 py-0.5 bg-brand-gold/10 text-brand-gold text-[8px] font-bold uppercase tracking-wide rounded">
+                        + ${addon.name}
+                      </span>
+                    `).join("")}
+                  </div>
+                ` : ""}
+
+                <div class="flex justify-between items-center pt-2">
+                  <div class="flex items-center gap-2.5 bg-white px-2.5 py-1 rounded-full border border-brand-ink/5">
+                    <button onclick="updateItemQuantity(${index}, -1)" class="text-brand-ink/35 hover:text-brand-ink font-bold font-sans cursor-pointer">-</button>
+                    <span class="text-[11px] font-bold text-brand-ink min-w-[12px] text-center">${item.quantity}</span>
+                    <button onclick="updateItemQuantity(${index}, 1)" class="text-brand-ink/35 hover:text-brand-ink font-bold font-sans cursor-pointer">+</button>
+                  </div>
+                  <p class="text-xs font-bold text-brand-ink">
+                    R$ ${(item.total * item.quantity).toFixed(2).replace(".", ",")}
+                  </p>
+                </div>
+              </div>
+            </div>
+          `).join("");
+        }
+
+        // Math totals updates
+        const totalProducts = getCartTotal();
+        document.getElementById("bag-selected-item-count").textContent = `Mimos selecionados (${itemsCount})`;
+        document.getElementById("bag-products-sum").textContent = `R$ ${totalProducts.toFixed(2).replace(".", ",")}`;
+        document.getElementById("bag-grand-subtotal").textContent = `R$ ${totalProducts.toFixed(2).replace(".", ",")}`;
+
+        // CEP labels inside Bag drawer
+        const successCard = document.getElementById("bag-cep-success-card");
+        const successMsg = document.getElementById("bag-cep-success-msg");
+        const rateBadge = document.getElementById("bag-shipping-rate-badge");
+
+        if (cartCity) {
+          if (successCard) successCard.classList.remove("hidden");
+          const isLocal = cartCity.toLowerCase().includes("epitácio") || cartCity.toLowerCase().includes("epitacio");
+
+          if (isLocal) {
+            if (successMsg) successMsg.textContent = "Retirada ou entrega local em Presidente Epitácio-SP";
+            if (rateBadge) {
+              rateBadge.textContent = "Retirar/Combinar Local";
+              rateBadge.className = "text-green-700 font-bold bg-green-50 px-2 py-0.5 rounded text-[10px]";
+            }
+          } else {
+            if (successMsg) successMsg.textContent = `Entrega para ${cartCity}/${cartUf}`;
+            if (rateBadge) {
+              rateBadge.textContent = "A combinar no WhatsApp";
+              rateBadge.className = "text-[#B5945B] font-bold bg-brand-gold/10 px-2 py-0.5 rounded text-[10px]";
+            }
+          }
+        } else {
+          if (successCard) successCard.classList.add("hidden");
+          if (rateBadge) {
+            rateBadge.textContent = "A combinar no WhatsApp";
+            rateBadge.className = "text-[#B5945B] font-bold bg-brand-gold/10 px-2 py-0.5 rounded text-[10px]";
+          }
+        }
+
+        lucide.createIcons();
+      }
+    </script>
+  </body>
+</html>
